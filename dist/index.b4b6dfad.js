@@ -28447,7 +28447,7 @@ const SignupView = ()=>{
             method: "POST",
             body: JSON.stringify(data),
             headers: {
-                "Conetent-type": "application/json"
+                "Content-type": "application/json"
             }
         }).then((response)=>{
             if (response.ok) {
