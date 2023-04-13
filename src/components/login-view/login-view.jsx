@@ -1,7 +1,6 @@
-import React from "react";
+import React from 'react';
 import { useState } from 'react';
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState('');
@@ -40,29 +39,44 @@ export const LoginView = ({ onLoggedIn }) => {
 
   // Render a form with input fields for the username and password
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        pattern="^[A-Za-z0-9 .,'\\-!?%&]+$"
-        title="Username should contain more than 5 characters, may only contain letters, numbers and special characters: .,'-!?%&"
-      />
-    </Form.Group>
-    
-    <Form.Group controlId="formPassword">
-      <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          title="Password should contain at least 8 characters, including at least one letter, one number and one special character: @$!%*#?&"
-        />
-    </Form.Group>
-      <Button variant="primary" type="submit" style={{ marginTop: "20px", marginBottom: "20px" }}>Submit</Button>
-    </Form>
+    <Container>
+      <Row>
+        <Col>
+          <CardGroup>
+            <Card>
+              <Card.Body style={{ backgroundColor: "Honeydew" }}>
+                <Card.Header style={{ backgroundColor: "lightgreen" }}>Login</Card.Header>
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group controlId="formUsername">
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    pattern="^[A-Za-z0-9 .,'\\-!?%&]+$"
+                    title="Username should contain more than 5 characters, may only contain letters, numbers and special characters: .,'-!?%&"
+                    placeholder="Enter your username..."
+                  />
+                </Form.Group>
+                
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      title="Password should contain at least 8 characters, including at least one letter, one number and one special character: @$!%*#?&"
+                      placeholder="Enter your password..."
+                    />
+                </Form.Group>
+                  <Button variant="primary" type="submit" style={{ marginTop: "20px", marginBottom: "20px" }}>Submit</Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </CardGroup>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

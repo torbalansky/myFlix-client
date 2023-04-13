@@ -1,12 +1,10 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Row, Col, Button } from 'react-bootstrap';
 
 // Define the MainView component
 export const MainView = () => {
@@ -55,15 +53,14 @@ export const MainView = () => {
     return (
     <Row className="justify-conetent-md-center">
       {!user ? (
-        <Col md={5}>
-          <h3>Login</h3>
+        <Col md={8}>
           <LoginView 
             onLoggedIn={(user, token) =>  {
             setUser(user);
             setToken(token);
         }} 
       />
-      <h3>Sign Up</h3>
+      or
       <SignupView />
       </Col>
       ) : null}
@@ -75,14 +72,13 @@ export const MainView = () => {
   if (selectedMovie) {
     return (
       <Row className="justify-content-md-center">
-        <Col md={8}>
+        <Col md={12}>
       <Button onClick={() => {
         setUser(null); 
         setToken(null); 
         localStorage.clear();
       }}
       >
-        Logout
         </Button>
       <MovieView movie={selectedMovie} 
       onBackClick={() => setSelectedMovie(null)} 
@@ -96,7 +92,7 @@ export const MainView = () => {
   if (movies.length === 0) {
     return (
       <Row className="justify-content-md-center">
-        <Col md={8}>
+        <Col md={12}>
           <Button onClick={() => {
             setUser(null);
             setToken(null);
