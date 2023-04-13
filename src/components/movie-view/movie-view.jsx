@@ -1,27 +1,38 @@
+import React from 'react';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+
+import './movie-view.scss';
+
 export const MovieView = ({ movie, onBackClick }) => {
     return (
-      <div>
-        <div>
-          <img src={movie.image} />
+      <Row>
+        <Col>
+        <div className="movie-view">
+          <div className="movie-poster">
+          <img src={movie.ImagePath} />
         </div>
         <div>
           <span>Title: </span>
-          <span>{movie.title}</span>
+          <span>{movie.Title}</span>
         </div>
         <div>
           <span>Description: </span>
-          <span>{movie.description}</span>
+          <span>{movie.Description}</span>
         </div>
         <div>
           <span>Genre: </span>
-          <span>{movie.genre}</span>
+          <span>{movie.Genre}</span>
         </div>
         <div>
           <span>Director: </span>
-          <span>{movie.director}</span>
+          <span>{movie.Director}</span>
         </div>
-        <button onClick={onBackClick}>Back</button>
+        <Button onClick={onBackClick} className="back-button" style={{ cursor: "pointer"}}>Back</Button>
       </div>
+      </Col>
+      </Row>
     );
   };
   

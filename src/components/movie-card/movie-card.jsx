@@ -1,19 +1,26 @@
+import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
+import "./movie-card.scss";
 
 // Functional component named MovieCard
 // Two props, `movie` and `onMovieClick`
 export const MovieCard = ({ movie, onMovieClick }) => {
   
-    // Returns a div element that has an onClick event listener attached to it
-    // The onMovieClick function is called with the `movie` object as a parameter when the div is clicked
-    return (
-      <div
-        onClick={() => {
-          onMovieClick(movie);
-        }}
-      >
-        {movie.title}
-      </div>
+     return (
+      <Card>
+        <Card.img variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text> 
+            Description: {movie.Description}
+          </Card.Text>
+          <Button onClick={() => onMovieClick(movie)} 
+          variant="link">More</Button>
+        </Card.Body>
+      </Card>
     );
   };
   

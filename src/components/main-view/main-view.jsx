@@ -1,8 +1,12 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 // Define the MainView component
 export const MainView = () => {
@@ -49,61 +53,68 @@ export const MainView = () => {
 
   if (!user) {
     return (
-    <>
-      <LoginView 
-      onLoggedIn={(user, token) =>  {
-        setUser(user);
-        setToken(token);
-      }} 
-    />
-    or
-    <SignupView />
-    </>
+    <Row className="justify-conetent-md-center">
+      {!user ? (
+        <Col md={5}>
+          <h3>Login</h3>
+          <LoginView 
+            onLoggedIn={(user, token) =>  {
+            setUser(user);
+            setToken(token);
+        }} 
+      />
+      <h3>Sign Up</h3>
+      <SignupView />
+      </Col>
+      ) : null}
+    </Row>
   );
 }
 
   // If a movie is selected, render the MovieView component
   if (selectedMovie) {
     return (
-      <>
-      <button onClick={() => {
+      <Row className="justify-content-md-center">
+        <Col md={8}>
+      <Button onClick={() => {
         setUser(null); 
         setToken(null); 
         localStorage.clear();
-      }}>Logout</button>
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} 
+      }}
+      >
+        Logout
+        </Button>
+      <MovieView movie={selectedMovie} 
+      onBackClick={() => setSelectedMovie(null)} 
       />
-      </>
-    );
-  }
+      </Col>
+    </Row>
+  );
+}
 
   // If there are no movies in the list, render a message
   if (movies.length === 0) {
     return (
-      <>
-      <button onClick={() => {
-        setUser(null);
-        setToken(null);
-        localStorage.clear();
-      }}>Logout</button>    
-    <div>The list is empty!</div>
-    </>
-    );
-  }
-
-  // Otherwise, render the list of movies using the MovieCard component
-  return (
-    loading ? (
+      <Row className="justify-content-md-center">
+        <Col md={8}>
+          <Button onClick={() => {
+            setUser(null);
+            setToken(null);
+            localStorage.clear();
+      }}>
+        Logout
+        </Button>    
+        {loading ? (
       <p>Loading...</p>
     ) : !movies || !movies.length ? (
-      <p> No movies found </p>
+      <p> No movies found. </p>
     ) : (
     <div>
-      <button onClick={() => {
-      setUser(null); 
-      setToken(null);
-      localStorage.clear();
-      }}>Logout</button>
+      <Button onClick={() => {
+        setUser(null); 
+        setToken(null);
+        localStorage.clear();
+      }}>Logout</Button>
 
       {movies.map((movie) => (
         <MovieCard
@@ -115,5 +126,11 @@ export const MainView = () => {
         />
       ))}
     </div>
-  ));
-};
+    )
+        }
+      </Col>
+    </Row>
+  );
+}};
+
+

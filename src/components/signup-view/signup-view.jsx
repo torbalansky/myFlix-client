@@ -1,4 +1,8 @@
+import React from 'react';
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "./signup-view.scss"
 
 export const SignupView = () => {
     // Define states for each form input
@@ -37,10 +41,11 @@ export const SignupView = () => {
 
     // Render the form with inputs and a submit button
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input
+        <Form onSubmit={handleSubmit}>
+            
+            <Form.Group controledId="formUsername" class="mb-3 mt-3">
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -49,10 +54,11 @@ export const SignupView = () => {
                     pattern="^[A-Za-z0-9 .,'\\-!?%&]+$"
                     title="Username should contain more than 5 characters, may only contain letters, numbers and special characters: .,'-!?%&"
                 />
-            </label>
-            <label>
-                Password:
-                <input
+            </Form.Group>
+            
+            <Form.Group controlId="Password">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -61,26 +67,28 @@ export const SignupView = () => {
                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                     title="Password should contain at least 8 characters, including at least one letter, one number and one special character: @$!%*#?&"
                 />
-            </label>
-            <label>
-                Email:
-                <input
+            </Form.Group>
+            
+            <Form.Group controlId="Email" class="mb-3">
+                <Form.Label>E-mail:</Form.Label>
+                <Form.Control
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required 
                 />
-            </label>
-            <label>
-                Birthday:
-                <input
+            </Form.Group>
+            
+            <Form.Group controlId="formDate" class="mb-3">
+                <Form.Label>Birthday:</Form.Label>
+                <Form.Control
                     type="date"
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
                     required 
                 />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+            </Form.Group>
+            <Button variant="primary" type="submit" class="signup-button">Submit</Button>
+        </Form>
     );
 };
