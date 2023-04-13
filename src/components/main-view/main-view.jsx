@@ -23,16 +23,12 @@ export const MainView = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!token) {
-      return;
-     }
-
+    setLoading(true);
     fetch("https://torbalansk-myflix-app.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const moviesFromApi = data.map((movie) => {
           return {
             id: movie._id, 
@@ -46,8 +42,29 @@ export const MainView = () => {
         });
       
         setMovies(moviesFromApi);
+        setLoading(false);
       });
   }, [token]);
+
+  return (
+    <div className="main-view">
+      {loading && <div>Loading...</div>}
+      {selectedMovie
+        ? <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+        : (
+          <div>
+            <Row>
+              {movies.map((movie) => (
+                <Col md={3} key={movie.id}>
+                  <MovieCard movie={movie} onMovieClick={(movie) => setSelectedMovie(movie)} />
+                </Col>
+              ))}
+            </Row>
+          </div>
+        )
+      }
+    </div>
+  );
 
   if (!user) {
     return (
@@ -128,5 +145,4 @@ export const MainView = () => {
     </Row>
   );
 }};
-
 
