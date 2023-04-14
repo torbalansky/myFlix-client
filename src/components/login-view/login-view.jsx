@@ -70,7 +70,7 @@ export const LoginView = ({ onLoggedIn }) => {
                         placeholder="Enter your password..."
                       />
                   </Form.Group>
-                    <Button variant="primary" type="submit" style={{ marginTop: "20px", marginBottom: "20px" }}>Submit</Button>
+                    <Button variant="primary" type="submit" style={{ marginTop: "20px", marginBottom: "20px" }}>Login</Button>
                   </Form>
                 </Card.Body>
               </Card>

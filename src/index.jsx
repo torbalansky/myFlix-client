@@ -12,7 +12,7 @@ import "./index.scss";
 // Main component (will eventually use all the others)
 const App = () => {
   return (
-  <Container className="custom-container" style={{ margin: "20px", maxwidht: "75%", border: "1px solid blue"}}>
+  <Container className="custom-container" style={{ maxwidht: "75%", border: "2px solid grey"}}>
     <MainView />
   </Container>
   );

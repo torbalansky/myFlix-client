@@ -1,13 +1,54 @@
+.h-100 {
+  padding: 10px;
+}
+
 .card-img-top {
   height: 300px;
   object-fit: cover;
+}
+
+.movie-description {
+  height: 56px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.movie-view {
+  text-align: center;
+  background-color: #dcf5f1;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.movie-view span:first-of-type {
+  font-weight: bold;
+}
+
+.movie-title {
+  color: #00008b;
+  font-size: large;
+  font-weight: bold;
+}
+
+.movie-poster img {
+  width: 40%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 
 
 
 
+.btn.btn-danger {
+  cursor: pointer;
+  margin: 20px;
+}
 
+.btn.btn-danger:hover {
+  background-color: #7e067e;
+}
 
 :root {
   --bs-blue: #0d6efd;

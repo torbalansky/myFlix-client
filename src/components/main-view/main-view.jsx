@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Row, Col, Button } from 'react-bootstrap';
+import './main-view.scss';
 
 // Define the MainView component
 export const MainView = () => {
@@ -25,12 +26,13 @@ export const MainView = () => {
     if (!token) {
       return;
      }
-
+    setLoading(true);
     fetch("https://torbalansk-myflix-app.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
+        setLoading(false);
         console.log(data);
         const moviesFromApi = data.map((movie) => {
           return {
@@ -51,73 +53,59 @@ export const MainView = () => {
   if (!user) {
     return (
       <Row className="justify-content-md-center">
-      {!user ? (
         <Col md={5}>
-          <LoginView 
-            onLoggedIn={(user, token) =>  {
+          <LoginView onLoggedIn={(user, token) => {
             setUser(user);
             setToken(token);
-        }} 
-      />
-      or
-      <SignupView />
-      </Col>
-      ) : null}
-    </Row>
-  );
-}
-
+          }} />
+          or
+          <SignupView />
+        </Col>
+      </Row>
+    );
+  }
+  
   // If a movie is selected, render the MovieView component
   if (selectedMovie) {
     return (
       <Row className="justify-content-md-center">
         <Col md={12}>
-      <Button onClick={() => {
-        setUser(null); 
-        setToken(null); 
-        localStorage.clear();
-      }}
-      >
-        </Button>
-      <MovieView movie={selectedMovie} 
-      onBackClick={() => setSelectedMovie(null)} 
-      />
-      </Col>
-    </Row>
+          <Button onClick={() => {
+            setUser(null);
+            setToken(null);
+            localStorage.clear();
+          }} variant="primary" className="btn btn-danger">Logout</Button>
+          <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+        </Col>
+      </Row>
     );
   }
-
-  // If there are no movies in the list, render a message
-  if (movies.length === 0) {
-    return (
-      <>
+  
+  // Otherwise, render the list of movies using the MovieCard component
+  return (
+    <div className="main-view">
       <Button onClick={() => {
         setUser(null);
         setToken(null);
         localStorage.clear();
-      }}>Logout</Button>    
-    <div>The list is empty!</div>
-    </>
-    );
-  }
-
-// Otherwise, render the list of movies using the MovieCard component
-return (
-  <div className="main-view">
-    {loading && <div>Loading...</div>}
-    {selectedMovie
-      ? <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-      : (
-        <div>
-          <Row>
-            {movies.map((movie) => (
-              <Col md={3} key={movie.id}>
-                <MovieCard movie={movie} onMovieClick={() => setSelectedMovie(movie)} />
-              </Col>
-            ))}
-          </Row>
-        </div>
-      )
-    }
-  </div>
-);
+      }} variant="primary" className="btn btn-danger">Logout</Button>
+      {loading && <div>Loading...</div>}
+      {selectedMovie
+        ? <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+        : movies.length === 0
+        ? <div>The list is empty!</div>
+        : (
+          <div>
+            <Row>
+              {movies.map((movie) => (
+                <Col md={3} key={movie.id}>
+                  <MovieCard movie={movie} onMovieClick={() => setSelectedMovie(movie)} />
+                </Col>
+              ))}
+            </Row>
+          </div>
+        )
+      }
+    </div>
+  );
+}  
