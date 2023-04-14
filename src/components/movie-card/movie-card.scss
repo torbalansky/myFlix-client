@@ -1,0 +1,14 @@
+.h-100 {
+ padding: 10px;
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+  }
+  
+.movie-description {
+    height: 56px; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
