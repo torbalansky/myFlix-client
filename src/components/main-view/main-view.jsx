@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -23,12 +22,16 @@ export const MainView = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    if (!token) {
+      return;
+     }
+
     fetch("https://torbalansk-myflix-app.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         const moviesFromApi = data.map((movie) => {
           return {
             id: movie._id, 
@@ -42,35 +45,14 @@ export const MainView = () => {
         });
       
         setMovies(moviesFromApi);
-        setLoading(false);
       });
   }, [token]);
 
-  return (
-    <div className="main-view">
-      {loading && <div>Loading...</div>}
-      {selectedMovie
-        ? <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-        : (
-          <div>
-            <Row>
-              {movies.map((movie) => (
-                <Col md={3} key={movie.id}>
-                  <MovieCard movie={movie} onMovieClick={(movie) => setSelectedMovie(movie)} />
-                </Col>
-              ))}
-            </Row>
-          </div>
-        )
-      }
-    </div>
-  );
-
   if (!user) {
     return (
-    <Row className="justify-conetent-md-center">
+      <Row className="justify-content-md-center">
       {!user ? (
-        <Col md={8}>
+        <Col md={5}>
           <LoginView 
             onLoggedIn={(user, token) =>  {
             setUser(user);
@@ -102,47 +84,40 @@ export const MainView = () => {
       />
       </Col>
     </Row>
-  );
-}
+    );
+  }
 
   // If there are no movies in the list, render a message
   if (movies.length === 0) {
     return (
-      <Row className="justify-content-md-center">
-        <Col md={12}>
-          <Button onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-      }}>
-        Logout
-        </Button>    
-        {loading ? (
-      <p>Loading...</p>
-    ) : !movies || !movies.length ? (
-      <p> No movies found. </p>
-    ) : (
-    <div>
+      <>
       <Button onClick={() => {
-        setUser(null); 
+        setUser(null);
         setToken(null);
         localStorage.clear();
-      }}>Logout</Button>
+      }}>Logout</Button>    
+    <div>The list is empty!</div>
+    </>
+    );
+  }
 
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-    </div>
-    )
-        }
-      </Col>
-    </Row>
-  );
-}};
-
+// Otherwise, render the list of movies using the MovieCard component
+return (
+  <div className="main-view">
+    {loading && <div>Loading...</div>}
+    {selectedMovie
+      ? <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+      : (
+        <div>
+          <Row>
+            {movies.map((movie) => (
+              <Col md={3} key={movie.id}>
+                <MovieCard movie={movie} onMovieClick={() => setSelectedMovie(movie)} />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      )
+    }
+  </div>
+);

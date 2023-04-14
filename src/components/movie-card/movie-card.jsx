@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Button, Card } from 'react-bootstrap';
 
 import "./movie-card.scss";
 
@@ -9,13 +7,15 @@ import "./movie-card.scss";
 // Two props, `movie` and `onMovieClick`
 export const MovieCard = ({ movie, onMovieClick }) => {
   
-     return (
+    // Returns a div element that has an onClick event listener attached to it
+    // The onMovieClick function is called with the `movie` object as a parameter when the div is clicked
+    return (
       <Card>
-        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Img variant="top" src={movie.image} className="card-img-top"/>
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Title>{movie.title}</Card.Title>
           <Card.Text> 
-            Description: {movie.Description}
+            {movie.description}
           </Card.Text>
           <Button onClick={() => onMovieClick(movie)} 
           variant="link">More</Button>

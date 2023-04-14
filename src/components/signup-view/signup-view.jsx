@@ -1,7 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState } from "react";
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
-import "./signup-view.scss"
+import "./signup-view.scss";
 
 export const SignupView = () => {
     // Define states for each form input
@@ -40,7 +39,7 @@ export const SignupView = () => {
 
     // Render the form with inputs and a submit button
     return (
-    <Container>
+        <Container>
       <Row>
         <Col>
           <CardGroup>
