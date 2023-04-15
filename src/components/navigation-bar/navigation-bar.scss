@@ -1,0 +1,21 @@
+.logout-link {
+    background-color: rgb(249, 218, 241);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-link:hover {
+    background-color: pink;
+}
+
+
+.home-link {
+    background-color: rgb(213, 246, 220);
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.home-link:hover {
+    background-color: rgb(235, 246, 209);
+}

@@ -1,16 +1,17 @@
-.h-100 {
-  padding: 10px;
-}
-
 .card-img-top {
   height: 300px;
   object-fit: cover;
+  padding: 10px;
 }
 
-.movie-description {
-  height: 56px;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.card-body {
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+}
+
+* {
+  margin-bottom: 10px;
 }
 
 .movie-view {
@@ -41,13 +42,27 @@
 
 
 
-.btn.btn-danger {
+
+
+.logout-link {
   cursor: pointer;
-  margin: 20px;
+  background-color: #f9daf1;
+  border-radius: 5px;
 }
 
-.btn.btn-danger:hover {
-  background-color: #7e067e;
+.logout-link:hover {
+  background-color: pink;
+}
+
+.home-link {
+  cursor: pointer;
+  background-color: #d5f6dc;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.home-link:hover {
+  background-color: #ebf6d1;
 }
 
 :root {
