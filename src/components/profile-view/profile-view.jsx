@@ -31,7 +31,7 @@ export function ProfileView ({movies, OnUpdateUserInfo}) {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.put(`https://torbalansk-myflix-app.herokuapp.com/users/${user}`, {
+          const response = await axios.put(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
             Username: user.Username,
             Password: user.Password,
             Email: user.Email,
@@ -49,7 +49,7 @@ export function ProfileView ({movies, OnUpdateUserInfo}) {
 
       const removeFav = async (id) => {
         try {
-          const response = await axios.delete(`https://torbalansk-myflix-app.herokuapp.com/users/${user}/favorites/${id}`, {
+          const response = await axios.delete(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/favorites/${id}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
           });
           setUser(response.data);

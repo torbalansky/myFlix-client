@@ -13,6 +13,7 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
   const similarMovies = currentMovie
   ? movie.filter(m => m.genre === currentMovie.genre && m.id !== currentMovie.id)
   : [];
+
   const [isFavorite, setIsFavorite] = useState(user && user.favoriteMovies ? user.favoriteMovies.includes(movieId) : false);
 
 
@@ -24,11 +25,12 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
   }, [movieId, user])
 
   const addFavorite = () => {
-    const currentUser = JSON.parse(localStorage.getItem('user'));
-    if (!currentUser) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    ;
+    if (!user) {
       return;
     }
-    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${currentUser._id}/movies/${movieId}`, {
+    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -56,7 +58,7 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
     if (!user) {
       return;
     }
-    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user._id}/movies/${movieId}`, {
+    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -72,7 +74,7 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
         if (updateUser) {
           alert("Successfully deleted from favorites");
           setIsFavorite(false);
-          updateUser(updateUser);
+          updateUser(updatedUser);
         }
       })
       .catch(e => {
@@ -80,6 +82,7 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
       });
   }
   console.log(currentMovie);
+  console.log(user);
 
   return  currentMovie ? (
     <>
