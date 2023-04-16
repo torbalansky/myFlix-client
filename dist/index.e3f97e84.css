@@ -44,26 +44,31 @@
 
 
 
-.logout-link {
+.navbar {
+  height: 70px;
+  width: 100%;
+}
+
+.ms-auto {
   cursor: pointer;
-  background-color: #f9daf1;
-  border-radius: 5px;
+  background-color: #deff06;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-weight: 800;
+}
+
+.navbar-title {
+  font-weight: 1000;
+  color: #f31e7e !important;
 }
 
 .logout-link:hover {
   background-color: pink;
+  border-radius: 25px;
+  padding: 10px;
 }
 
-.home-link {
-  cursor: pointer;
-  background-color: #d5f6dc;
-  border-radius: 5px;
-  margin-right: 5px;
-}
 
-.home-link:hover {
-  background-color: #ebf6d1;
-}
 
 :root {
   --bs-blue: #0d6efd;
