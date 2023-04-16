@@ -7,8 +7,8 @@ function UserInfo() {
   useEffect(() => {
     const getUserInfo = async () => {
       const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("user");
-      const url = `https://torbalansk-myflix-app.herokuapp.com/users/${userId}`;
+      const user = localStorage.getItem("user");
+      const url = `https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`;
 
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -22,8 +22,8 @@ function UserInfo() {
   return (
     <>
       <h4>Your info</h4>
-      <p>User: {user.Username}</p>
-      <p>e-mail: {user.Email}</p>
+      <p>User: {user && user.Username}</p>
+      <p>e-mail: {user && user.Email}</p>
     </>
   );
 }

@@ -7,12 +7,13 @@ import UpdateUser from './update-user';
 import './profile-view.scss';
 import axios from "axios";
 
-export function ProfileView ({movies, OnUpdateUserInfo}) {
+export function ProfileView ({movie, OnUpdateUserInfo}) {
     const [user, setUser] = useState({}); 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthday, setBirthdate] = useState("");
+    const [movies, setMovies] = useState([]);
 
     const favoriteMovieList = movies.filter(movie => user.FavoriteMovies.includes(movie._id));
 

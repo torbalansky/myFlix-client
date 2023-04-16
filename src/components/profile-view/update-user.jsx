@@ -21,36 +21,36 @@ function UpdateUser ({handleSubmit, handleUpdate, user}) {
     <>
     <h4>Update</h4>
     <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
-      <From.Group>
+      <Form.Group>
         <Form.Label>Username:</Form.Label>
         <Form.Control
           type="text"
           name="Username"
-          defaultValue={user.Username}
+          defaultValue={user && user.Username}
           onChange={e => handleUpdate(e)}
           required
           placeholder="Enter a username"
         />
-      </From.Group>
+      </Form.Group>
 
-      <From.Group>
+      <Form.Group>
         <Form.Label>Password:</Form.Label>
         <Form.Control
           type="password"
           name="Password"
-          defaultValue={user.Password}
+          defaultValue={user && user.Password}
           onChange={e => handleUpdate(e)}
           required
           placeholder="Your password must be minimum 8 charactes"
         />
-      </From.Group>
+      </Form.Group>
 
       <Form.Group>
         <Form.Label>Email address:</Form.Label>
         <input
           type="email"
           name="Email"
-          defaultValue={user.Email}
+          defaultValue={user && user.Email}
           onChange={e => handleUpdate(e.target.value)}
           required
           placeholder="Enter your e-mail"

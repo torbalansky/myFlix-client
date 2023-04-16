@@ -27294,7 +27294,9 @@ const MainView = ()=>{
                                 }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                         user: user,
-                                        movies: movies
+                                        token: token,
+                                        movies: movies,
+                                        setUser: setUser
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false)
@@ -27325,7 +27327,15 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 123,
+                            lineNumber: 129,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                            path: "/users/:id",
+                            element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {}, void 0, false, void 0, void 0)
+                        }, void 0, false, {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 149,
                             columnNumber: 11
                         }, undefined)
                     ]
@@ -47169,13 +47179,14 @@ var _profileViewScss = require("./profile-view.scss");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
-function ProfileView({ movies , OnUpdateUserInfo  }) {
+function ProfileView({ movie , OnUpdateUserInfo  }) {
     _s();
     const [user, setUser] = (0, _react.useState)({});
     const [username, setUsername] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
     const [email, setEmail] = (0, _react.useState)("");
     const [birthday, setBirthdate] = (0, _react.useState)("");
+    const [movies, setMovies] = (0, _react.useState)([]);
     const favoriteMovieList = movies.filter((movie)=>user.FavoriteMovies.includes(movie._id));
     const getUser = async ()=>{
         try {
@@ -47241,22 +47252,22 @@ function ProfileView({ movies , OnUpdateUserInfo  }) {
                                     email: user.Email
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 77,
+                                    lineNumber: 78,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 76,
+                                lineNumber: 77,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 75,
+                            lineNumber: 76,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 74,
+                        lineNumber: 75,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -47269,28 +47280,28 @@ function ProfileView({ movies , OnUpdateUserInfo  }) {
                                     handleUpdate: handleUpdate
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 85,
+                                    lineNumber: 86,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 84,
+                                lineNumber: 85,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 83,
+                            lineNumber: 84,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 82,
+                        lineNumber: 83,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 73,
+                lineNumber: 74,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMoviesDefault.default), {
@@ -47298,17 +47309,17 @@ function ProfileView({ movies , OnUpdateUserInfo  }) {
                 removeFav: removeFav
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 90,
+                lineNumber: 91,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/profile-view.jsx",
-        lineNumber: 72,
+        lineNumber: 73,
         columnNumber: 9
     }, this);
 }
-_s(ProfileView, "uMJy/Lh0QlYN7qTgtz5GOcm0+sc=");
+_s(ProfileView, "lV0b9BYpblTH3P2lW+FvNPApIHo=");
 _c = ProfileView;
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -47339,8 +47350,8 @@ function UserInfo() {
     (0, _react.useEffect)(()=>{
         const getUserInfo = async ()=>{
             const token = localStorage.getItem("token");
-            const userId = localStorage.getItem("user");
-            const url = `https://torbalansk-myflix-app.herokuapp.com/users/${userId}`;
+            const user = localStorage.getItem("user");
+            const url = `https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`;
             const response = await (0, _axiosDefault.default).get(url, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -47362,7 +47373,7 @@ function UserInfo() {
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: [
                     "User: ",
-                    user.Username
+                    user && user.Username
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/user-info.jsx",
@@ -47372,7 +47383,7 @@ function UserInfo() {
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: [
                     "e-mail: ",
-                    user.Email
+                    user && user.Email
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/user-info.jsx",
@@ -51683,7 +51694,7 @@ function UpdateUser({ handleSubmit , handleUpdate , user  }) {
                 className: "profile-form",
                 onSubmit: (e)=>handleSubmit(e),
                 children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(From.Group, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                 children: "Username:"
@@ -51695,7 +51706,7 @@ function UpdateUser({ handleSubmit , handleUpdate , user  }) {
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                 type: "text",
                                 name: "Username",
-                                defaultValue: user.Username,
+                                defaultValue: user && user.Username,
                                 onChange: (e)=>handleUpdate(e),
                                 required: true,
                                 placeholder: "Enter a username"
@@ -51710,7 +51721,7 @@ function UpdateUser({ handleSubmit , handleUpdate , user  }) {
                         lineNumber: 24,
                         columnNumber: 7
                     }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(From.Group, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                 children: "Password:"
@@ -51722,7 +51733,7 @@ function UpdateUser({ handleSubmit , handleUpdate , user  }) {
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                 type: "password",
                                 name: "Password",
-                                defaultValue: user.Password,
+                                defaultValue: user && user.Password,
                                 onChange: (e)=>handleUpdate(e),
                                 required: true,
                                 placeholder: "Your password must be minimum 8 charactes"
@@ -51749,7 +51760,7 @@ function UpdateUser({ handleSubmit , handleUpdate , user  }) {
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                 type: "email",
                                 name: "Email",
-                                defaultValue: user.Email,
+                                defaultValue: user && user.Email,
                                 onChange: (e)=>handleUpdate(e.target.value),
                                 required: true,
                                 placeholder: "Enter your e-mail"
