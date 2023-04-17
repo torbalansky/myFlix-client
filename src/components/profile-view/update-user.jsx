@@ -46,7 +46,7 @@ function UpdateUser ({handleSubmit, handleUpdate, user}) {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Email address:</Form.Label>
+        <Form.Label style={{ marginRight: "10px" }}>E-mail address:</Form.Label>
         <input
           type="email"
           name="Email"

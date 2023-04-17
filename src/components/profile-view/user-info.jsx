@@ -22,8 +22,8 @@ function UserInfo() {
   return (
     <>
       <h4>Your info</h4>
-      <p>User: {user && user.Username}</p>
-      <p>e-mail: {user && user.Email}</p>
+      <p>Username: {user && user.Username}</p>
+      <p>E-mail: {user && user.Email}</p>
     </>
   );
 }

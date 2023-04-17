@@ -47355,7 +47355,7 @@ function UserInfo() {
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: [
-                    "User: ",
+                    "Username: ",
                     user && user.Username
                 ]
             }, void 0, true, {
@@ -47365,7 +47365,7 @@ function UserInfo() {
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: [
-                    "e-mail: ",
+                    "E-mail: ",
                     user && user.Email
                 ]
             }, void 0, true, {
@@ -51739,7 +51739,10 @@ function UpdateUser({ handleSubmit , handleUpdate , user  }) {
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                children: "Email address:"
+                                style: {
+                                    marginRight: "10px"
+                                },
+                                children: "E-mail address:"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
                                 lineNumber: 49,
