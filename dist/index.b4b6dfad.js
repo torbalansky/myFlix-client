@@ -51811,7 +51811,8 @@ function UpdateUser({ handleSubmit , user  }) {
                         variant: "danger",
                         onClick: deleteUser,
                         style: {
-                            marginLeft: "10px"
+                            marginLeft: "10px",
+                            float: "right"
                         },
                         children: " Delete account "
                     }, void 0, false, {

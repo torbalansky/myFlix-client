@@ -92,7 +92,7 @@ function UpdateUser ({handleSubmit, user}) {
 
       <Button variant="primary" type="submit" onClick={updateUser}> Update </Button>
 
-      <Button variant="danger" onClick={deleteUser} style={{ marginLeft: "10px" }}> Delete account </Button>
+      <Button variant="danger" onClick={deleteUser} style={{ marginLeft: "10px", float: "right" }}> Delete account </Button>
     </Form>
     </>
   );
