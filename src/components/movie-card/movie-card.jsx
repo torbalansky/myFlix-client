@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
+import { MovieView } from "../movie-view/movie-view";
 
 import "./movie-card.scss";
 
@@ -20,7 +21,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
             {movie.genre}
           </Card.Text>
           <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button onClick={() => onMovieClick(movie)} className="more-button">More</Button>
+          <Button onClick={() => onMovieClick && onMovieClick(movie)} className="more-button">More</Button>
           </Link>
         </Card.Body>
       </Card>
@@ -34,3 +35,5 @@ MovieCard.propTypes = {
     genre: PropTypes.string.isRequired,
   }).isRequired
 };
+
+export default MovieCard;

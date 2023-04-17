@@ -81,6 +81,7 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
         alert(e);
       });
   }
+  
   console.log(currentMovie);
   console.log(user);
 
