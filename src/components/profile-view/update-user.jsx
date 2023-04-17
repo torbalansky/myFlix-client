@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function UpdateUser ({handleSubmit, handleUpdate, user}) {
+function UpdateUser ({handleSubmit, user}) {
+    const [updatedUser, setUpdatedUser] = useState({ ...user });
+  
+    const handleUpdate = (e) => {
+      const { name, value } = e.target;
+      setUpdatedUser(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    };
+
   const updateUser = async () => {
     try {
       let token = localStorage.getItem('token');
@@ -15,7 +25,30 @@ function UpdateUser ({handleSubmit, handleUpdate, user}) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteUser = async () => {
+    try {
+      let token = localStorage.getItem('token');
+      let url = `https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}`;
+      const response = await axios.delete(url, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log(response);
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  const confirmDelete = () => {
+    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      deleteUser();
+    }
+  }
+
 
   return (
     <>
@@ -48,16 +81,18 @@ function UpdateUser ({handleSubmit, handleUpdate, user}) {
       <Form.Group>
         <Form.Label style={{ marginRight: "10px" }}>E-mail address:</Form.Label>
         <input
-          type="email"
-          name="Email"
-          defaultValue={user && user.Email}
-          onChange={e => handleUpdate({ ...user, Email: e.target.value})}
-          required
-          placeholder="Enter your e-mail"
-        />
+        type="email"
+        name="Email"
+        defaultValue={user && user.Email}
+        onChange={handleUpdate}
+        required
+        placeholder="Enter your e-mail"
+/>
       </Form.Group>
 
       <Button variant="primary" type="submit" onClick={updateUser}> Update </Button>
+
+      <Button variant="danger" onClick={deleteUser} style={{ marginLeft: "10px" }}> Delete account </Button>
     </Form>
     </>
   );
