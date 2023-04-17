@@ -1,7 +1,9 @@
 import React from "react";
-import { Button, Col, Row, Figure } from 'react-bootstrap';
+import { Button, Col, Row, Figure, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import './fav-movies.scss'
+
 
 function FavoriteMovies({ favoriteMovieList }) {
     const removeFav = async (id) => {
@@ -18,34 +20,35 @@ function FavoriteMovies({ favoriteMovieList }) {
     };
 
     return (
-        <>
-            <Row>
-                <Col xs={12}>
-                    <h2>Favorite Movies</h2>
-                </Col>
-                {favoriteMovieList.map((movie) => {
-                    return (
-                        <Col xs={12} md={6} lg={3} key={movie._id}>
-                            <Figure>
-                                <Link to={`/movies/${movie._id}`}>
-                                    <Figure.Image
-                                        src={movie.ImagePath}
-                                        alt={movie.Title}
-                                    />
-                                    <Figure.Caption>
-                                        {movie.Title}
-                                    </Figure.Caption>
-                                </Link>
-                            </Figure>
-                            <h4>{movie.Title}</h4>
-                            <Button variant="secondary" onClick={() => removeFav(movie._id)}>
-                                Remove from list
-                            </Button>
-                        </Col>
-                    )
-                })}
-            </Row>
-        </>
+        <Card>
+             <Card.Body>   
+                <Row>
+                    <Col xs={12}>
+                        <h2>Favorite Movies</h2>
+                    </Col>
+                    {favoriteMovieList.map(({ ImagePath, Title, _id }) => {
+                        return (
+                            <Col xs={12} md={6} lg={3} key={_id} className="fav-movies">
+                                <Figure>
+                                <Link to={`/movies/${_id}`}>
+                                        <Figure.Image
+                                            src={ImagePath}
+                                            alt={Title}
+                                        />
+                                        <Figure.Caption>
+                                            {Title}
+                                        </Figure.Caption>
+                                    </Link>
+                                </Figure>
+                                <Button variant="secondary" onClick={() => removeFav(movie._id)}>
+                                    Remove from list
+                                </Button>
+                            </Col>
+                        )
+                    })}
+                </Row>
+            </Card.Body>
+        </Card>
     );
 }
 

@@ -70,6 +70,38 @@
 
 
 
+.fav-movies {
+  margin-bottom: 20px;
+}
+
+.fav-movies figure {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.fav-movies figure img {
+  height: 300px;
+  margin: auto;
+  display: block;
+}
+
+.fav-movies figure figcaption {
+  text-align: center;
+}
+
+button.btn {
+  margin: auto;
+  display: block;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

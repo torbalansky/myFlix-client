@@ -8,7 +8,7 @@ function UserInfo() {
     const getUserInfo = async () => {
       const token = localStorage.getItem("token");
       const user = localStorage.getItem("user");
-      const url = `https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`;
+      const url = `https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}`;
 
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
