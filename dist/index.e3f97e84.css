@@ -25,7 +25,7 @@ p span:first-of-type {
 }
 
 .movie-poster {
-  width: 50%;
+  width: 40%;
   height: auto;
   margin: 0 auto;
   display: block;
