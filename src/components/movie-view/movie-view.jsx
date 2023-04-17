@@ -58,7 +58,7 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
     if (!user) {
       return;
     }
-    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     })

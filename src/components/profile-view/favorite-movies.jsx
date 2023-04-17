@@ -1,23 +1,27 @@
 import React from "react";
 import { Button, Col, Row, Figure, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import axios from "axios";
 import './fav-movies.scss'
 
 
 function FavoriteMovies({ favoriteMovieList }) {
-    const removeFav = async (id) => {
-        try {
-            let token = localStorage.getItem('token');
-            let url = `https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}/movies/${id}`
-            const response = await axios.delete(url, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            console.log(response.data);
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    const removeFav = (id) => {
+        let token = localStorage.getItem('token');
+    let url = `https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}/movies/${id}`;
+    fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  };
 
     return (
         <Card>

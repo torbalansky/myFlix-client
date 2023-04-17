@@ -1,20 +1,32 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 function UserInfo() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const getUserInfo = async () => {
+    const getUserInfo = () => {
       const token = localStorage.getItem("token");
       const user = localStorage.getItem("user");
       const url = `https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}`;
 
-      const response = await axios.get(url, {
+      fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
-      });
-      setUser(response.data);
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Failed to retrieve user data");
+          }
+        })
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
+
 
     getUserInfo();
   }, []);

@@ -5,7 +5,7 @@ import UserInfo from './user-info'
 import FavoriteMovies from './favorite-movies';
 import UpdateUser from './update-user';
 import './profile-view.scss';
-import axios from "axios";
+
 
 export function ProfileView ({movies, OnUpdateUserInfo}) {
     const [user, setUser] = useState({}); 
@@ -16,52 +16,86 @@ export function ProfileView ({movies, OnUpdateUserInfo}) {
 
     const favoriteMovieList = user && user.FavoriteMovies ? movies.filter(movie => user.FavoriteMovies.includes(movie._id)) : [];
 
-    const getUser = async () => {
-        try {
-          const response = await axios.get(`https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}`, {
+    const getUser = () => {
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-          });
-          setUser(response.data);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to retrieve user data');
+            }
+        })
+        .then(data => {
+            setUser(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    };
 
-      const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-          const response = await axios.put(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
-            Username: user.Username,
-            Password: user.Password,
-            Email: user.Email,
-            Birthday: user.Birthday
-          }, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-          });
-          OnUpdateUserInfo(response.data);
-          alert('User updated successfully');
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      
-
-      const removeFav = async (id) => {
-        try {
-          const response = await axios.delete(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/favorites/${id}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-          });
-          setUser(response.data);
-          alert('Movie removed from favorites');
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      
+       
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                Username: username,
+                Password: password,
+                Email: email,
+                Birthday: birthday
+            }),
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to update user data');
+            }
+        })
+        .then(data => {
+            OnUpdateUserInfo(data);
+            alert('User updated successfully');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    };
 
     const handleUpdate = (e) => {
         e.preventDefault();
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    const removeFav = (id) => {
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to remove movie from favorites');
+            }
+        })
+        .then(data => {
+            setUser(data);
+            alert('Movie removed from favorites');
+        })
+        .catch(error => {
+            console.log(error);
+        });
     };
 
     useEffect(() => {
