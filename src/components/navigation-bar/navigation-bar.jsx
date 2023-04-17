@@ -6,7 +6,7 @@ import "./navigation-bar.scss";
 export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
     <Navbar bg="info" expand="lg">
-      <Container>
+      <Container fluid>
         <Navbar.Brand as={Link} to="/" className="navbar-title">MyFlix</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

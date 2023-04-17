@@ -1,24 +1,29 @@
-.movie-view {
-    background-color: rgb(220, 245, 241);
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-
-.movie-view span:first-of-type {
+p span:first-of-type {
     font-weight: bold;
-}
-
+  }
+ 
 .movie-title {
     color: darkblue;
     font-weight: bold;
     font-size:large;
 }
 
-.movie-poster img {
-    width: 40%;
-   height: auto;
-   margin-bottom: 20px;
+.movie-poster {
+    width: 50%;
+    height: auto;
+    margin-bottom: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+.mt-3 {
+    float: left;
+}
+
+.similar-movies-heading {
+    margin-bottom: 20px;
+}
+
+.ms-2 {
+   float: right;
 }

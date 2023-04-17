@@ -51,7 +51,7 @@ function UpdateUser ({handleSubmit, handleUpdate, user}) {
           type="email"
           name="Email"
           defaultValue={user && user.Email}
-          onChange={e => handleUpdate(e.target.value)}
+          onChange={e => handleUpdate({ ...user, Email: e.target.value})}
           required
           placeholder="Enter your e-mail"
         />

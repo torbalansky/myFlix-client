@@ -14,15 +14,7 @@
   margin-bottom: 10px;
 }
 
-.movie-view {
-  text-align: center;
-  background-color: #dcf5f1;
-  border-radius: 10px;
-  margin: 0 auto 20px;
-  padding: 20px;
-}
-
-.movie-view span:first-of-type {
+p span:first-of-type {
   font-weight: bold;
 }
 
@@ -32,10 +24,23 @@
   font-weight: bold;
 }
 
-.movie-poster img {
-  width: 40%;
+.movie-poster {
+  width: 50%;
   height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.mt-3 {
+  float: left;
+}
+
+.similar-movies-heading {
   margin-bottom: 20px;
+}
+
+.ms-2 {
+  float: right;
 }
 
 
