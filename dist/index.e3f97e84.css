@@ -1,7 +1,8 @@
+@import "https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap";
 .card-img-top {
-  height: 300px;
-  object-fit: cover;
-  padding: 10px;
+  height: 500px;
+  object-fit: contain;
+  padding-top: 2px;
 }
 
 .card-body {
@@ -10,67 +11,136 @@
   display: flex;
 }
 
-* {
-  margin-bottom: 10px;
+.card {
+  margin: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+}
+
+.more-button {
+  font-size: 14px;
+}
+
+.movie-details {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+}
+
+.movie-poster {
+  max-width: 450px;
+  border: 2px solid #fff;
+  margin: 10px auto 0;
 }
 
 p span:first-of-type {
+  color: #78e4e4;
+  margin-right: 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+p span:last-of-type {
+  font-size: 28px;
   font-weight: bold;
 }
 
 .movie-title {
-  color: #00008b;
+  color: #fff;
   font-size: large;
   font-weight: bold;
 }
 
-.movie-poster {
-  width: 40%;
-  height: auto;
-  margin: 0 auto;
-  display: block;
-}
-
-.mt-3 {
-  float: left;
-}
-
 .similar-movies-heading {
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 
 .ms-2 {
   float: right;
+  text-align: center;
+  font-size: 26px !important;
+  font-weight: bold !important;
 }
 
+p {
+  color: #fff;
+  text-align: left;
+  margin-left: 50px;
+  margin-right: 50px;
+}
 
+.similar-movies-heading {
+  margin-left: 50px;
+}
+
+.mb-4 {
+  margin-left: 100px;
+}
+
+.movie-view-back-button {
+  width: 210px;
+  margin-top: 50px;
+  margin-left: 10px;
+  font-size: 26px !important;
+  font-weight: bold !important;
+}
 
 
 
 
 
 .navbar {
-  height: 70px;
+  height: 80px;
   width: 100%;
+  border-radius: 5px;
+  justify-content: center;
 }
 
-.ms-auto {
-  cursor: pointer;
-  background-color: #deff06;
-  border-radius: 10px;
-  margin-top: 10px;
-  font-weight: 800;
+.nav-link {
+  margin-top: 5px;
+  margin-left: 10px;
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.me-auto {
+  background-color: #0dcaf0;
+  border-radius: 5px;
+  margin-top: 5px;
 }
 
 .navbar-title {
-  font-weight: 1000;
-  color: #f31e7e !important;
+  margin-top: 5px;
+  font-weight: bold;
+  color: #f24fb1 !important;
+  font-size: 40px !important;
 }
 
 .logout-link:hover {
-  background-color: pink;
-  border-radius: 25px;
-  padding: 10px;
+  background-color: #c76878;
+  border-radius: 10px;
+}
+
+.home-link:hover, .profile-link:hover {
+  background-color: #06628d;
+  border-radius: 10px;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+
+.navbar-collapse {
+  z-index: 9999;
+}
+
+.d-flex {
+  width: 400px;
+  margin-top: 5px;
 }
 
 
@@ -105,6 +175,42 @@ button.btn {
 
 .card {
   margin-bottom: 20px;
+}
+
+.profile-form {
+  width: 100%;
+  max-width: 700px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  margin: auto;
+  padding: 20px;
+}
+
+.profile-form label {
+  font-weight: bold;
+}
+
+.profile-form input {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px #0000004d;
+}
+
+.profile-form button.primary {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.profile-form button:hover {
+  background-color: #0062cc;
 }
 
 :root {
@@ -12113,6 +12219,11 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+
+body {
+  background-color: #000 !important;
+  font-family: Roboto, sans-serif !important;
 }
 
 :root {

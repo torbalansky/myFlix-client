@@ -13,13 +13,10 @@ export const MovieCard = ({ movie, onMovieClick }) => {
     // Returns a div element that has an onClick event listener attached to it
     // The onMovieClick function is called with the `movie` object as a parameter when the div is clicked
     return (
-      <Card className="h-100" style={{ marginBottom: '5px' }}>
+      <Card className="h-60">
         <Card.Img variant="top" src={movie.image} className="card-img-top"/>
         <Card.Body>
           <Card.Title>{movie.title}</Card.Title>
-          <Card.Text className="movie-genre"> 
-            {movie.genre}
-          </Card.Text>
           <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button onClick={() => onMovieClick && onMovieClick(movie)} className="more-button">More</Button>
           </Link>

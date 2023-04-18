@@ -1,7 +1,7 @@
 .card-img-top {
-  height: 300px;
-  object-fit: cover;
-  padding: 10px;
+  height: 500px;
+  object-fit: contain;
+  padding-top: 2px;
 }
   
 .card-body {
@@ -10,8 +10,14 @@
   text-align: center;
 }
 
-* {
-  margin-bottom: 10px;
+.card {
+  margin: 10px;
 }
 
+.card-title {
+  font-size: 18px; 
+}
 
+.more-button {
+  font-size: 14px;
+}

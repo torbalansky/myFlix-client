@@ -7,7 +7,6 @@ import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { Row, Col } from 'react-bootstrap';
-import './main-view.scss';
 
 export const MainView = () => {
 
@@ -17,6 +16,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [viewMovies, setViewMovies] = useState(movies);
   const handleMovieClick = (movie) => {
     console.log(`Clicked on movie with ID: ${movie.id}`);
   };
@@ -50,6 +50,10 @@ export const MainView = () => {
       });
   }, [token]);
 
+  useEffect(() => {
+    setViewMovies(movies);
+  }, [movies]);
+
   return (
     <BrowserRouter>
       <NavigationBar
@@ -59,6 +63,9 @@ export const MainView = () => {
           setToken(null);
           localStorage.clear();
         }}
+        onSearch={(query) => {
+          setViewMovies(movies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())));
+      }}
       />
       <Row className="justify-content-md-center">
         <Routes>
@@ -136,8 +143,8 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col xs={12} md={6} lg={4} key={movie.id}>
+                    {viewMovies.map((movie) => (
+                      <Col xs={12} md={8} lg={3} key={movie.id}>
                         <MovieCard movie={movie} onMovieClick={handleMovieClick}/>
                       </Col>
                     ))}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form } from 'react-bootstrap';
 
+import "./update-user.scss"
+
 function UpdateUser ({handleSubmit, user}) {
     const [updatedUser, setUpdatedUser] = useState({ ...user });
   
@@ -71,7 +73,7 @@ function UpdateUser ({handleSubmit, user}) {
 
   return (
     <>
-    <h4>Update</h4>
+    <h3>Manage your account</h3>
     <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
       <Form.Group>
         <Form.Label>Username:</Form.Label>
@@ -98,7 +100,7 @@ function UpdateUser ({handleSubmit, user}) {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label style={{ marginRight: "10px" }}>E-mail address:</Form.Label>
+        <Form.Label style={{ margin: "20px", marginTop: "10px" }}>E-mail address:</Form.Label>
         <input
         type="email"
         name="Email"

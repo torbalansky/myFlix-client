@@ -33,7 +33,7 @@ function UserInfo() {
 
   return (
     <>
-      <h4>Your info</h4>
+      <h3>Your info</h3>
       <p>Username: {user && user.Username}</p>
       <p>E-mail: {user && user.Email}</p>
     </>
