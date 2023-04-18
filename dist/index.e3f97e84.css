@@ -30,20 +30,19 @@
 }
 
 .movie-poster {
-  max-width: 450px;
+  max-width: 400px;
   border: 2px solid #fff;
   margin: 10px auto 0;
 }
 
 p span:first-of-type {
   color: #78e4e4;
-  margin-right: 5px;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
 }
 
 p span:last-of-type {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -59,9 +58,8 @@ p span:last-of-type {
 }
 
 .ms-2 {
-  float: right;
-  text-align: center;
-  font-size: 26px !important;
+  border: 1px solid #fff !important;
+  font-size: 18px !important;
   font-weight: bold !important;
 }
 
@@ -81,11 +79,18 @@ p {
 }
 
 .movie-view-back-button {
-  width: 210px;
-  margin-top: 50px;
-  margin-left: 10px;
-  font-size: 26px !important;
+  float: right;
+  width: 100px;
+  margin-top: 80px;
+  margin-right: 200px;
+  border: 1px solid #fff !important;
+  font-size: 18px !important;
   font-weight: bold !important;
+}
+
+.favorite-button {
+  margin-top: 10px;
+  margin-left: 100px;
 }
 
 
@@ -116,7 +121,7 @@ p {
 .navbar-title {
   margin-top: 5px;
   font-weight: bold;
-  color: #f24fb1 !important;
+  color: #eb5fcd !important;
   font-size: 40px !important;
 }
 

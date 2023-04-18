@@ -87,36 +87,39 @@ export const MovieView = ({ movie, user, token, updateUser }) => {
 
   return  currentMovie ? (
     <>
-    <div className="movie-details">
-      <img src={currentMovie.image} className="movie-poster" alt={currentMovie.title} style={{ marginLeft: '20px' }}/>
-      <div className="movie-description">
-        <p>
-          <span>Title: </span>
-          <span className="movie-title">{currentMovie.title}</span>
-        </p>
-        <p>
-          <span>Description: </span>
-          <span>{currentMovie.description}</span>
-        </p>
-        <p>
-          <span>Stars: </span>
-          <span>{currentMovie.stars.join(', ')}</span>
-        </p>
-        <p>
-          <span>Genre: </span>
-          <span>{currentMovie.genre}</span>
-        </p>
-        <p>
-          <span>Director: </span>
-          <span>{currentMovie.director}</span>
-        </p>
-        <Link to={"/"} className="btn btn-primary movie-view-back-button">Back</Link>
+    <div className="favorite-button">
         {isFavorite ? 
-          <button className="btn btn-danger ms-2" onClick={removeFavorite} style={{marginTop: '50px'}}>Remove from favorites</button>
-          : <button className="btn btn-success ms-2" onClick={addFavorite} style={{marginTop: '50px'}}>Add to favorites</button>
-        }     
+              <Button className="btn btn-danger ms-2" onClick={removeFavorite}>Remove from favorites</Button>
+              : <Button className="btn btn-success ms-2" onClick={addFavorite}>Add to favorites</Button>
+            }
+    </div>
+    <div className="movie-details">
+        <img src={currentMovie.image} className="movie-poster" alt={currentMovie.title} style={{ marginLeft: '20px' }}/>
+        <div className="movie-description">
+          <p>
+            <span>Title: </span>
+            <span className="movie-title">{currentMovie.title}</span>
+          </p>
+          <p>
+            <span>Description: </span>
+            <span>{currentMovie.description}</span>
+          </p>
+          <p>
+            <span>Stars: </span>
+            <span>{currentMovie.stars.join(', ')}</span>
+          </p>
+          <p>
+            <span>Genre: </span>
+            <span>{currentMovie.genre}</span>
+          </p>
+          <p>
+            <span>Director: </span>
+            <span>{currentMovie.director}</span>
+          </p>
+          <Link to={"/"} className="btn btn-primary movie-view-back-button">Back</Link>
       </div>              
     </div>
+    
     <Col xs={12}>
       <h3 className="text-light similar-movies-heading">Similar movies:</h3>
       <Row className="row-cols-1 row-cols-md-4 g-4">
