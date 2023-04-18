@@ -1,12 +1,14 @@
 # myFlix-client
 
 ## Objective
+
 The objective of this project is to build a client-side movie app using React as the front-end and a REST API as the back-end.
 
 ## Built with
 
 - React
 - React Bootstrap
+- Redux
 - JavaScript
 - HTML
 - CSS/SCSS
