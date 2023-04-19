@@ -23,75 +23,7 @@
   font-size: 14px;
 }
 
-.movie-details {
-  flex-direction: row;
-  align-items: center;
-  display: flex;
-}
 
-.movie-poster {
-  max-width: 400px;
-  border: 2px solid #fff;
-  margin: 10px auto 0;
-}
-
-p span:first-of-type {
-  color: #78e4e4;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-p span:last-of-type {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.movie-title {
-  color: #fff;
-  font-size: large;
-  font-weight: bold;
-}
-
-.similar-movies-heading {
-  margin-top: 50px;
-  margin-bottom: 20px;
-}
-
-.ms-2 {
-  border: 1px solid #fff !important;
-  font-size: 18px !important;
-  font-weight: bold !important;
-}
-
-p {
-  color: #fff;
-  text-align: left;
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-.similar-movies-heading {
-  margin-left: 50px;
-}
-
-.mb-4 {
-  margin-left: 100px;
-}
-
-.movie-view-back-button {
-  float: right;
-  width: 100px;
-  margin-top: 80px;
-  margin-right: 200px;
-  border: 1px solid #fff !important;
-  font-size: 18px !important;
-  font-weight: bold !important;
-}
-
-.favorite-button {
-  margin-top: 10px;
-  margin-left: 100px;
-}
 
 
 
