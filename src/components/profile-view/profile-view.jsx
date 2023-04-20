@@ -7,118 +7,116 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-  
-    const favoriteMovies = user && user.FavoriteMovies
-      ? movies.filter((movie) => user.FavoriteMovies.includes(movie._id))
-      : [];
-  
+
+    let favoriteMovies = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
+
     const handleUpdate = (e) => {
-      const { name, value } = e.target;
-      switch (name) {
-        case "username":
-          setUsername(value);
-          break;
-        case "password":
-          setPassword(value);
-          break;
-        case "email":
-          setEmail(value);
-          break;
-        default:
-          break;
-      }
+        const { name, value } = e.target;
+        switch (name) {
+            case "username":
+                setUsername(value);
+                break;
+            case "password":
+                setPassword(value);
+                break;
+            case "email":
+                setEmail(value);
+                break;
+            default:
+                break;
+        }
     };
-  
+
     const updateCurrentUser = (data) => {
-      if (!user || !user.Username) {
-        alert("User is not defined.");
-        return;
-      }
-  
-      if (!data.username || !data.password || !data.email) {
-        alert("Please enter a valid username, password, and email address.");
-        return;
-      }
-  
-      fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            alert("Changing userdata failed");
-            return false;
-          }
+        if (!user || !user.Username) {
+            alert("User is not defined.");
+            return;
+        }
+
+        if (!data.username || !data.password || !data.email) {
+            alert("Please enter a valid username, password, and email address.");
+            return;
+        }
+
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
         })
-        .then((updatedUser) => {
-          if (updatedUser) {
-            alert("Successfully changed userdata");
-            updateUser(updatedUser);
-          }
-        })
-        .catch((e) => {
-          alert(e);
-        });
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    alert("Changing userdata failed");
+                    return false;
+                }
+            })
+            .then((updatedUser) => {
+                if (updatedUser) {
+                    alert("Successfully changed userdata");
+                    updateUser(updatedUser);
+                }
+            })
+            .catch((e) => {
+                alert(e);
+            });
     };
-    
+
     const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      const data = {
-        username,
-        password,
-        email
-      };
-  
-      updateCurrentUser(data);
+        e.preventDefault();
+
+        const data = {
+            username,
+            password,
+            email
+        };
+
+        updateCurrentUser(data);
     };
-  
+
     const removeFavorite = (movie) => {
-      fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => {
-          if (response.ok) {
-            const updatedUser = { ...user, FavoriteMovies: user.FavoriteMovies.filter((id) => id !== movie._id) };
-            updateUser(updatedUser);
-          } else {
-            alert("Failed to remove favorite movie");
-          }
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
         })
-        .catch((error) => {
-          console.log(error);
-        });
+            .then((response) => {
+                if (response.ok) {
+                    const updatedUser = { ...user, favoriteMovies: user.favoriteMovies.filter((id) => id !== movie.id) };
+                    updateUser(updatedUser);
+                } else {
+                    alert("Failed to remove favorite movie");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
-  
+
     const deleteAccount = () => {
-      fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => {
-          if (response.ok) {
-            alert("Your account has been deleted. Goodbye!");
-            onLoggedOut();
-          } else {
-            alert("Could not delete account");
-          }
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
         })
-        .catch((e) => {
-          alert(e);
-        });
+            .then((response) => {
+                if (response.ok) {
+                    alert("Your account has been deleted. Goodbye!");
+                    onLoggedOut();
+                } else {
+                    alert("Could not delete account");
+                }
+            })
+            .catch((e) => {
+                alert(e);
+            });
     };
-    
+
     useEffect(() => {
-      if (user) {
-        updateCurrentUser(user);
-      }
+        if (user) {
+            updateCurrentUser(user);
+        }
     }, [user]);
 
   return (
@@ -183,33 +181,28 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
         <Card.Body>
           <Row>
             <Col xs={12}>
-              <h2>Favorite Movies</h2>
+                <h2>Favorite Movies</h2>
             </Col>
-            {favoriteMovies.map(({ ImagePath, Title, _id }) => {
-              return (
-                <Col xs={12} md={6} lg={3} key={_id} className="fav-movies">
-                  <Figure>
-                    <Link to={`/movies/${_id}`}>
-                      <Figure.Image src={ImagePath} alt={Title} />
-                      <Figure.Caption>{Title}</Figure.Caption>
-                    </Link>
-                  </Figure>
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      if (confirm("Are you sure?")) {
-                        removeFavorite({
-                          id: _id,
-                        });
-                      }
-                    }}
-                  >
-                    Remove from Favorites
-                  </Button>
+            {favoriteMovies.map(({ movie }) => {
+                return (
+                <Col xs={12} md={6} lg={3} key={movie._id} className="fav-movies">
+                    <div className="mb-4">
+                    <MovieCard movie={movie} />
+                    <Button
+                        variant="danger"
+                        onClick={() => {
+                        if (confirm("Are you sure?")) {
+                            removeFavorite(_id);
+                        }
+                        }}
+                    >
+                        Remove from Favorites
+                    </Button>
+                    </div>
                 </Col>
-              );
+                );
             })}
-          </Row>
+            </Row>
         </Card.Body>
       </Card>
     </div>

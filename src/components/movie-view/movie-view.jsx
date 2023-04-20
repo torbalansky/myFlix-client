@@ -15,33 +15,37 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
   ? movie.filter(m => m.genre === currentMovie.genre && m.id !== currentMovie.id)
   : [];
 
-  const [isFavorite, setIsFavorite] = useState(user && user.favoriteMovies ? user.favoriteMovies.includes(movieId) : false);
+  const [isFavorite, setIsFavorite] = useState(user && user.favoriteMovies && user.favoriteMovies.includes(movieId));
 
   useEffect(() => {
-    setIsFavorite(user.favoriteMovies?.includes(movie.id));
+    setIsFavorite(user && Array.isArray(user.favoriteMovies) && user.favoriteMovies.includes(movieId));
     window.scrollTo(0, 0);
-}, [movieId])
-
-const addFavorite = (event) => {
-  event.preventDefault();
-  const favoriteMovie = fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${currentMovie.id}`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert("Movie added to favorites!");
-      const updatedUser = { ...user, favoriteMovies: data.favoriteMovies };
-      updateUser(updatedUser); // call the function passed as a prop to update the user
-      setIsFavorite(true);
-    })
-    .catch((e) => {
-      console.log(e);
-      alert(`Failed to add ${currentMovie.title} to favorites`);
-    });
-};
-
+  }, [movieId, user]);
   
+
+  const addFavorite = () => {
+    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${currentMovie.id}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        if (response.ok) {
+          const updatedfavoriteMovies = [...(user.favoriteMovies || [])];
+          if (!updatedfavoriteMovies.includes(currentMovie.id)) {
+            updatedfavoriteMovies.push(currentMovie.id);
+          }
+          const updatedUser = { ...user, favoriteMovies: updatedfavoriteMovies };
+          updateUser(updatedUser);
+          setIsFavorite(true);
+          alert("Successfully added to favorites");
+        } else {
+          alert("Failed to add favorite movie");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };  
 
   const removeFavorite = () => {
     if (!user) {
@@ -84,8 +88,8 @@ const addFavorite = (event) => {
           <p className="text-light">Stars: {currentMovie.stars.join(', ')}</p>
           <p>{currentMovie.description}</p>
           <div className="mb-3">
-            <Button className="btn btn-success ms-2" onClick={addFavorite} style={{marginTop: "20px", marginBottom: "20px"}}>Add to favorites</Button>  
-            <Button className="btn btn-danger ms-2" onClick={removeFavorite} style={{marginTop: "20px", marginBottom: "20px"}}>Remove from favorites</Button> 
+          <Button variant="btn bg-success" onClick={() => addFavorite(movie)} style={{color: "white"}}>Add to Favorites</Button>  
+          <Button className="btn btn-danger ms-2" onClick={removeFavorite}>Remove from favorites</Button> 
       </div>
           <Link to={"/"} className="btn btn-primary movie-view-back-button" style={{marginTop: "20px", marginBottom: "20px", marginLeft: "10px"}}>Back</Link>
         </div>
@@ -119,4 +123,3 @@ MovieView.propTypes = {
   }).isRequired),
   updateUser: PropTypes.func.isRequired
 };
-
