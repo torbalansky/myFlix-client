@@ -1,127 +1,218 @@
 import { useState, useEffect } from "react";
-import { Card, Row, Container, Col } from 'react-bootstrap';
+import { Card, Col, Button, Row, Figure, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import UserInfo from './user-info'
-import FavoriteMovies from './favorite-movies';
-import UpdateUser from './update-user';
-import './profile-view.scss';
+import "./profile-view.scss";
 
-
-export function ProfileView ({movies, OnUpdateUserInfo}) {
-    const [user, setUser] = useState({}); 
+export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [birthday, setBirthdate] = useState("");
-
-    const favoriteMovieList = user && user.FavoriteMovies ? movies.filter(movie => user.FavoriteMovies.includes(movie._id)) : [];
-
-    const getUser = () => {
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${localStorage.getItem('user')}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to retrieve user data');
-            }
-        })
-        .then(data => {
-            setUser(data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-       
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
-            method: "PUT",
-            body: JSON.stringify({
-                Username: username,
-                Password: password,
-                Email: email,
-                Birthday: birthday
-            }),
-            headers: {
-                "Content-type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to update user data');
-            }
-        })
-        .then(data => {
-            OnUpdateUserInfo(data);
-            alert('User updated successfully');
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    };
-
+  
+    const favoriteMovies = user && user.FavoriteMovies
+      ? movies.filter((movie) => user.FavoriteMovies.includes(movie._id))
+      : [];
+  
     const handleUpdate = (e) => {
-        e.preventDefault();
+      const { name, value } = e.target;
+      switch (name) {
+        case "username":
+          setUsername(value);
+          break;
+        case "password":
+          setPassword(value);
+          break;
+        case "email":
+          setEmail(value);
+          break;
+        default:
+          break;
+      }
     };
-
-    useEffect(() => {
-        getUser();
-    }, []);
-
-    const removeFav = (id) => {
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
+  
+    const updateCurrentUser = (data) => {
+      if (!user || !user.Username) {
+        alert("User is not defined.");
+        return;
+      }
+  
+      if (!data.username || !data.password || !data.email) {
+        alert("Please enter a valid username, password, and email address.");
+        return;
+      }
+  
+      fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            alert("Changing userdata failed");
+            return false;
+          }
         })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to remove movie from favorites');
-            }
+        .then((updatedUser) => {
+          if (updatedUser) {
+            alert("Successfully changed userdata");
+            updateUser(updatedUser);
+          }
         })
-        .then(data => {
-            setUser(data);
-            alert('Movie removed from favorites');
-        })
-        .catch(error => {
-            console.log(error);
+        .catch((e) => {
+          alert(e);
         });
     };
-
+    
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      const data = {
+        username,
+        password,
+        email
+      };
+  
+      updateCurrentUser(data);
+    };
+  
+    const removeFavorite = (movie) => {
+      fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => {
+          if (response.ok) {
+            const updatedUser = { ...user, FavoriteMovies: user.FavoriteMovies.filter((id) => id !== movie._id) };
+            updateUser(updatedUser);
+          } else {
+            alert("Failed to remove favorite movie");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+  
+    const deleteAccount = () => {
+      fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("Your account has been deleted. Goodbye!");
+            onLoggedOut();
+          } else {
+            alert("Could not delete account");
+          }
+        })
+        .catch((e) => {
+          alert(e);
+        });
+    };
+    
     useEffect(() => {
-        getUser();
-    }, []);
+      if (user) {
+        updateCurrentUser(user);
+      }
+    }, [user]);
 
-    return (
-        <Container>
-            <Row>
-                <Col xs={12} sm={4}>
-                    <Card>
-                        <Card.Body>
-                        <UserInfo name= {user.username} email= {user.Email} />
-                        </Card.Body>
-                    </Card>
+  return (
+    <>
+    <Row>
+      <Col md={6}>
+        <Card>
+          <Card.Body>
+            <h4>Manage your account</h4>
+            <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
+            <Form.Group>
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
+                type="text"
+                name="username"
+                defaultValue={user && user.Username}
+                onChange={e => handleUpdate(e)}
+                required
+                placeholder="Enter a username"
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                 type="password"
+                name="password"
+                defaultValue={user && user.Password}
+                onChange={handleUpdate}
+                required
+                placeholder="Your password must be minimum 8 characters"
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label style={{ margin: "20px", marginTop: "10px" }}>E-mail address:</Form.Label>
+                <Form.Control
+                type="email"
+                name="email"
+                defaultValue={user && user.Email}
+                onChange={handleUpdate}
+                required
+                placeholder="Enter your e-mail"
+                />
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={() => updateCurrentUser({ username, password, email })}>Update</Button>
+            </Form>
+            <Button
+              variant="danger"
+              onClick={() => {
+                if (confirm("Are you sure?")) {
+                  deleteAccount();
+                }
+              }}
+            >
+              Delete user account
+            </Button>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+    <div style={{ padding: "0 20px" }}>
+    <Card>
+        <Card.Body>
+          <Row>
+            <Col xs={12}>
+              <h2>Favorite Movies</h2>
+            </Col>
+            {favoriteMovies.map(({ ImagePath, Title, _id }) => {
+              return (
+                <Col xs={12} md={6} lg={3} key={_id} className="fav-movies">
+                  <Figure>
+                    <Link to={`/movies/${_id}`}>
+                      <Figure.Image src={ImagePath} alt={Title} />
+                      <Figure.Caption>{Title}</Figure.Caption>
+                    </Link>
+                  </Figure>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      if (confirm("Are you sure?")) {
+                        removeFavorite({
+                          id: _id,
+                        });
+                      }
+                    }}
+                  >
+                    Remove from Favorites
+                  </Button>
                 </Col>
-
-                <Col xs={12} sm={8}>
-                    <Card>
-                        <Card.Body>
-                        <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-            <FavoriteMovies favoriteMovieList={favoriteMovieList} removeFav={removeFav} />
-        </Container>
-    );
-}
+              );
+            })}
+          </Row>
+        </Card.Body>
+      </Card>
+    </div>
+    </>
+  );
+};

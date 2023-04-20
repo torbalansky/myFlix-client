@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from 'react';
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
-import "./login-view.scss"
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState('');
@@ -42,7 +41,7 @@ export const LoginView = ({ onLoggedIn }) => {
   return (
       <Container>
         <Row>
-          <Col>
+          <Col md={10}>
             <CardGroup>
               <Card>
                 <Card.Body style={{ backgroundColor: "Honeydew" }}>

@@ -1,28 +1,4 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap";
-.card-img-top {
-  height: 500px;
-  object-fit: contain;
-  padding-top: 2px;
-}
-
-.card-body {
-  text-align: center;
-  flex-direction: column;
-  display: flex;
-}
-
-.card {
-  margin: 10px;
-}
-
-.card-title {
-  font-size: 18px;
-}
-
-.more-button {
-  font-size: 14px;
-}
-
 .navbar {
   height: 80px;
   width: 100%;
@@ -24158,4 +24134,4 @@ textarea.form-control-lg {
   }
 }
 
-/*# sourceMappingURL=index.e3f97e84.css.map */
+/*# sourceMappingURL=index.f1a6d998.css.map */

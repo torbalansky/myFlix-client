@@ -17,6 +17,10 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [viewMovies, setViewMovies] = useState(movies);
+  const handleUpdateUser = (updatedUser) => {
+    setUser(updatedUser);
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+  };
   const handleMovieClick = (movie) => {
     console.log(`Clicked on movie with ID: ${movie.id}`);
   };
@@ -107,14 +111,18 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={12}>
-                    <MovieView movie={movies} username={user.Username} favoriteMovies={user.FavoriteMovies}/>
+                    <MovieView 
+                    movie={movies} 
+                    username={user.Username} 
+                    favoriteMovies={user.FavoriteMovies} 
+                    updateUser={handleUpdateUser}/>
                   </Col>
                 )}
               </>
             }
           />
           <Route
-            path="/profile"
+            path="/profiles"
             element={
               <>
                 {!user ? (
@@ -126,7 +134,7 @@ export const MainView = () => {
                     token={token}
                     movies={movies}
                     setUser={setUser}
-                   
+                    favoriteMovies={user.FavoriteMovies} 
                     />
                   </Col>
                 )}
