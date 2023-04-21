@@ -14,9 +14,10 @@
 }
 
 .me-auto {
-    background-color: #0dcaf0;
+    background-color: rgb(199, 82, 191);
     margin-top: 5px;
     border-radius: 5px;
+    padding-right: 10px;
 }
 
 .navbar-title {
@@ -27,13 +28,13 @@
 }
 
 .logout-link:hover {
-    background-color: rgb(199, 104, 120);
+    background-color: rgb(235, 95, 153);
     border-radius: 10px;
 }
 
 .home-link:hover,
 .profile-link:hover {
-    background-color: rgb(6, 98, 141);
+    background-color: rgb(71, 114, 141);
     border-radius: 10px;
 }
   

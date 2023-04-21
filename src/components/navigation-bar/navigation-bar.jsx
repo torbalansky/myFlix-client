@@ -19,7 +19,7 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
   };
 
   return (
-    <Navbar bg="info" expand="lg">
+    <Navbar bg="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="navbar-title" onClick={() => onSearch("")}>MyFlix</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

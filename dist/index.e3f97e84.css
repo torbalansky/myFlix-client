@@ -39,9 +39,10 @@
 }
 
 .me-auto {
-  background-color: #0dcaf0;
+  background-color: #c752bf;
   border-radius: 5px;
   margin-top: 5px;
+  padding-right: 10px;
 }
 
 .navbar-title {
@@ -52,12 +53,12 @@
 }
 
 .logout-link:hover {
-  background-color: #c76878;
+  background-color: #eb5f99;
   border-radius: 10px;
 }
 
 .home-link:hover, .profile-link:hover {
-  background-color: #06628d;
+  background-color: #47728d;
   border-radius: 10px;
 }
 
@@ -94,20 +95,6 @@
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: 2px 2px 5px #0000004d;
-}
-
-.profile-form button.primary {
-  color: #fff;
-  cursor: pointer;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  margin-top: 20px;
-  padding: 10px 20px;
-}
-
-.profile-form button:hover {
-  background-color: #0062cc;
 }
 
 :root {
@@ -12119,7 +12106,7 @@ textarea.form-control-lg {
 }
 
 body {
-  background-color: #000 !important;
+  background-color: #5a5a61 !important;
   font-family: Roboto, sans-serif !important;
 }
 

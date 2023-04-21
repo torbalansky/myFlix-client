@@ -79,14 +79,14 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
   console.log(user);
 
   return currentMovie ? (
-        <div className="row" style={{color: "white", marginLeft: "40px", marginTop: "20px"}}>
+        <div className="row" style={{color: "white", marginLeft: "40px", marginTop: "20px", fontSize:"20px"}}>
         <div className="col-md-6">
         <div className="movie-details">
           <h2 className="text-light">{currentMovie.title}</h2>
           <p className="text-light">Directed by {currentMovie.director}</p>
           <p className="text-light">Genre: {currentMovie.genre}</p>
           <p className="text-light">Stars: {currentMovie.stars.join(', ')}</p>
-          <p>{currentMovie.description}</p>
+          <p><strong>{currentMovie.description}</strong></p>
           <div className="mb-3">
           <Button variant="btn bg-success" onClick={() => addFavorite(movie)} style={{color: "white"}}>Add to Favorites</Button>  
           <Button className="btn btn-danger ms-2" onClick={removeFavorite}>Remove from favorites</Button> 
