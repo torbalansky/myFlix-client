@@ -57,23 +57,20 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
     })
       .then(response => {
         if (response.ok) {
-          return response.json();
+          const updatedfavoriteMovies = user.favoriteMovies.filter(movieId => movieId !== currentMovie.id);
+          const updatedUser = { ...user, favoriteMovies: updatedfavoriteMovies };
+          updateUser(updatedUser);
+          setIsFavorite(false);
+          alert("Successfully deleted from favorites");
         } else {
           alert("Failed");
-          return false;
-        }
-      })
-      .then(updatedUser => {
-        if (updatedUser) {
-          alert("Successfully deleted from favorites");
-          setIsFavorite(false);
-          updateUser(updatedUser);
         }
       })
       .catch(e => {
         alert(e);
       });
-  };  
+  };
+  
   console.log(updateUser);
   console.log(currentMovie);
   console.log(user);
