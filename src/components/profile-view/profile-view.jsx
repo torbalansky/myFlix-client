@@ -80,7 +80,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
           favoriteMovies: user.favoriteMovies.filter(id => id !== movie.id)
         };
         
-        console.log('updatedUser', updatedUser); // Add this line to see the updated user object before sending it to the server
+        console.log('updatedUser', updatedUser); 
       
         fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
           method: "PUT",
@@ -102,6 +102,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
             if (user) {
               alert("Movie removed from favorites");
               setUser(updatedUser);
+              localStorage.setItem("user", JSON.stringify(updatedUser));
             }
           })
           .catch((e) => {
