@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, Col, Button, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./profile-view.scss";
 
-export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthday, setBirthday] = useState("");
+export function ProfileView({ onLoggedOut, movies, updateUser }) {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [Username, setUsername] = useState("");
+    const [Password, setPassword] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Birthday, setBirthday] = useState("");
 
     let favoriteMovies = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
 
@@ -15,10 +17,10 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
         event.preventDefault();
 
         const data = {
-            username,
-            password,
-            email,
-            birthday
+            Username,
+            Password,
+            Email,
+            Birthday
         }
 
         console.log("Submitting data: ", data);
@@ -82,7 +84,7 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                 <Form.Control
                 type="text"
                 name="username"
-                value={username}
+                value={Username}
                 onChange={e => setUsername(e.target.value)}
                 minLength="5"
                 required
@@ -94,7 +96,7 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                 <Form.Control
                 type="password"
                 name="password"
-                value={password}
+                value={Password}
                 onChange={e => setPassword(e.target.value)}
                 minLength="8"
                 required
@@ -106,7 +108,7 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                 <Form.Control
                 type="email"
                 name="email"
-                value={email}
+                value={Email}
                 onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="Enter your e-mail"
@@ -116,7 +118,7 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                  <Form.Label>Birthday:</Form.Label>
                 <Form.Control
                 type="date"
-                value={birthday}
+                value={Birthday}
                 onChange={e => setBirthday(e.target.value)}
                 
                 />
