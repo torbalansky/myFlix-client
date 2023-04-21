@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import React from 'react';
 import { Card, Col, Button, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view.jsx";
 import "./profile-view.scss";
 
 export function ProfileView({ onLoggedOut, movies, updateUser }) {
@@ -76,38 +76,39 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
 
     const handleRemoveFavoriteMovie = (movie) => {
         const updatedUser = {
-            ...user,
-            favoriteMovies: user.favoriteMovies.filter(id => id !== movie)
+          ...user,
+          favoriteMovies: user.favoriteMovies.filter(id => id !== movie.id)
         };
-    
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
-            method: "PUT",
-            body: JSON.stringify(updatedUser),
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
+        
+        console.log('updatedUser', updatedUser); // Add this line to see the updated user object before sending it to the server
+      
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+          method: "PUT",
+          body: JSON.stringify(updatedUser),
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         })
-        .then((response) => {
+          .then((response) => {
             if (response.ok) {
-                return response.json();
+              return response.json();
             } else {
-                alert("Removing movie from favorites failed");
-                return false;
+              alert("Removing movie from favorites failed");
+              return false;
             }
-        })
-        .then((user) => {
+          })
+          .then((user) => {
             if (user) {
-                alert("Movie removed from favorites");
-                setUser(updatedUser);
+              alert("Movie removed from favorites");
+              setUser(updatedUser);
             }
-        })
-        .catch((e) => {
+          })
+          .catch((e) => {
             alert(e);
-        });
-    };
-    
-
+          });
+      };
+      
 
   return (
     <>
@@ -194,8 +195,8 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
             </Col>
             {favoriteMoviesList.map((movie) => (
             <Col className="mb-4" key={movie._id} x1={2} lg={3} md={4} xs={6}>
-            <MovieCard key={movie.id} movie={movie} movies={movies} handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} />
-                <Button variant="outline-danger" onClick={() => handleRemoveFavoriteMovie(movie)}>Remove from favorites</Button>
+            <MovieCard key={movie.id} movie={movie} movies={movies} user={user} token={token} handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} />
+            <Button variant="danger" onClick={() => handleRemoveFavoriteMovie(movie)}> Remove from favorites </Button>
                     </Col>
                     ))}
                 </Row>
