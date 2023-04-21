@@ -27280,7 +27280,7 @@ const MainView = ()=>{
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                            path: "/users/:id?",
+                            path: "/users/:Username",
                             element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                 children: !user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                                     to: "/login",
@@ -47237,7 +47237,7 @@ function ProfileView({ user , token , onLoggedOut , movies , updateUser  }) {
             }
         }).then((response)=>{
             if (response.ok) {
-                alert("Your account has been deleted. Goodbye!");
+                alert("Your account has been deleted!");
                 onLoggedOut();
             } else alert("Could not delete account");
         }).catch((e)=>{

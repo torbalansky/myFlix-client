@@ -27,8 +27,8 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
             },
         })
             .then((response) => {
@@ -58,7 +58,7 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
         })
             .then((response) => {
                 if (response.ok) {
-                    alert("Your account has been deleted. Goodbye!");
+                    alert("Your account has been deleted!");
                     onLoggedOut();
                 } else {
                     alert("Could not delete account");
