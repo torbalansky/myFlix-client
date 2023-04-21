@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, Col, Button, Row, Figure, Form } from "react-bootstrap";
+import { Card, Col, Button, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./profile-view.scss";
 
@@ -7,36 +7,21 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [birthday, setBirthday] = useState("");
 
     let favoriteMovies = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
 
-    const handleUpdate = (e) => {
-        const { name, value } = e.target;
-        switch (name) {
-            case "username":
-                setUsername(value);
-                break;
-            case "password":
-                setPassword(value);
-                break;
-            case "email":
-                setEmail(value);
-                break;
-            default:
-                break;
-        }
-    };
+    const handleSubmit = event => {
+        event.preventDefault();
 
-    const updateCurrentUser = (data) => {
-        if (!user || !user.Username) {
-            alert("User is not defined.");
-            return;
+        const data = {
+            username,
+            password,
+            email,
+            birthday
         }
 
-        if (!data.username || !data.password || !data.email) {
-            alert("Please enter a valid username, password, and email address.");
-            return;
-        }
+        console.log("Submitting data: ", data);
 
         fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
             method: "PUT",
@@ -54,10 +39,10 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                     return false;
                 }
             })
-            .then((updatedUser) => {
-                if (updatedUser) {
+            .then((user) => {
+                if (user) {
                     alert("Successfully changed userdata");
-                    updateUser(updatedUser);
+                    updateUser(user);
                 }
             })
             .catch((e) => {
@@ -65,37 +50,8 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
             });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const data = {
-            username,
-            password,
-            email
-        };
-
-        updateCurrentUser(data);
-    };
-
-    const removeFavorite = (movie) => {
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
-            method: "DELETE",
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((response) => {
-                if (response.ok) {
-                    const updatedUser = { ...user, favoriteMovies: user.favoriteMovies.filter((id) => id !== movie.id) };
-                    updateUser(updatedUser);
-                } else {
-                    alert("Failed to remove favorite movie");
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
     const deleteAccount = () => {
+        console.log("doin")
         fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
@@ -112,13 +68,7 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                 alert(e);
             });
     };
-
-    useEffect(() => {
-        if (user) {
-            updateCurrentUser(user);
-        }
-    }, [user]);
-
+    
   return (
     <>
     <Row>
@@ -126,14 +76,15 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
         <Card>
           <Card.Body>
             <h4>Manage your account</h4>
-            <Form className="profile-form" onSubmit={(e) => handleSubmit(e)}>
+            <Form className="profile-form" onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
                 type="text"
                 name="username"
-                defaultValue={user && user.Username}
-                onChange={e => handleUpdate(e)}
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                minLength="5"
                 required
                 placeholder="Enter a username"
                 />
@@ -141,10 +92,11 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
             <Form.Group>
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
-                 type="password"
+                type="password"
                 name="password"
-                defaultValue={user && user.Password}
-                onChange={handleUpdate}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                minLength="8"
                 required
                 placeholder="Your password must be minimum 8 characters"
                 />
@@ -154,13 +106,22 @@ export function ProfileView({ user, token, onLoggedOut, movies, updateUser }) {
                 <Form.Control
                 type="email"
                 name="email"
-                defaultValue={user && user.Email}
-                onChange={handleUpdate}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="Enter your e-mail"
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={() => updateCurrentUser({ username, password, email })}>Update</Button>
+            <Form.Group>
+                 <Form.Label>Birthday:</Form.Label>
+                <Form.Control
+                type="date"
+                value={birthday}
+                onChange={e => setBirthday(e.target.value)}
+                
+                />
+                </Form.Group>
+            <Button className="mt-3" variant="primary" type="submit">Update</Button>
             </Form>
             <Button
               variant="danger"

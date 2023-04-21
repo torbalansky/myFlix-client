@@ -10,17 +10,17 @@ import { Row, Col } from 'react-bootstrap';
 
 export const MainView = () => {
 
-  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedUser = localStorage.getItem("user");
   const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser? storedUser : null);
-  const [token, setToken] = useState(storedToken? storedToken : null);
+  const [user, setUser] = useState(storedUser ? JSON.parse(storedUser) : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [viewMovies, setViewMovies] = useState(movies);
-  const handleUpdateUser = (updatedUser) => {
-    setUser(updatedUser);
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-  };
+  const updateUser = user => {
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
+  } 
   const handleMovieClick = (movie) => {
     console.log(`Clicked on movie with ID: ${movie.id}`);
   };
@@ -95,9 +95,39 @@ export const MainView = () => {
                 <Navigate to="/" />
               ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView onLoggedIn={(user, token) => {
+                      setUser(user)
+                      setToken(token)
+                      }}
+                    />
                   </Col>
-              )}
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/users/:id?"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>The list is empty!</Col>
+                ) : (
+                  <Col>
+                    <ProfileView 
+                      user={user} 
+                      token={token}
+                      movies={movies}
+                      onLoggedOut={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+                      }}
+                      updateUser={updateUser}
+                    />
+                  </Col>
+                )}
               </>
             }
           />
@@ -113,29 +143,9 @@ export const MainView = () => {
                   <Col md={12}>
                     <MovieView 
                     movie={movies} 
-                    username={user.Username} 
-                    favoriteMovies={user.FavoriteMovies} 
-                    updateUser={handleUpdateUser}/>
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : (
-                  <Col>
-                    <ProfileView 
                     user={user} 
                     token={token}
-                    movies={movies}
-                    setUser={setUser}
-                    favoriteMovies={user.FavoriteMovies} 
-                    />
+                    updateUser={updateUser}/>
                   </Col>
                 )}
               </>
@@ -153,7 +163,7 @@ export const MainView = () => {
                   <>
                     {viewMovies.map((movie) => (
                       <Col xs={12} md={8} lg={3} key={movie.id}>
-                        <MovieCard movie={movie} onMovieClick={handleMovieClick}/>
+                        <MovieCard movie={movie}/>
                       </Col>
                     ))}
                   </>
@@ -161,7 +171,6 @@ export const MainView = () => {
               </>
             }
           />
-          <Route path="/users/:id" element={<ProfileView />} />
         </Routes>
       </Row>
     </BrowserRouter>
