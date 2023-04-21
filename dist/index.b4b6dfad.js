@@ -47257,12 +47257,12 @@ function ProfileView({ onLoggedOut , movies , updateUser  }) {
             alert(e);
         });
     };
-    const handleRemoveFavoriteMovie = (movieId)=>{
+    const handleRemoveFavoriteMovie = (movie)=>{
         const updatedUser = {
             ...user,
-            favoriteMovies: user.favoriteMovies.filter((id)=>id !== movieId)
+            favoriteMovies: user.favoriteMovies.filter((id)=>id !== movie)
         };
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
             method: "PUT",
             body: JSON.stringify(updatedUser),
             headers: {
@@ -47568,7 +47568,7 @@ function ProfileView({ onLoggedOut , movies , updateUser  }) {
                                             }, this),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                                 variant: "outline-danger",
-                                                onClick: ()=>handleRemoveFavoriteMovie(movie._id),
+                                                onClick: ()=>handleRemoveFavoriteMovie(movie),
                                                 children: "Remove from favorites"
                                             }, void 0, false, {
                                                 fileName: "src/components/profile-view/profile-view.jsx",

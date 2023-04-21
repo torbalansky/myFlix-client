@@ -74,13 +74,13 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
             });
     };
 
-    const handleRemoveFavoriteMovie = (movieId) => {
+    const handleRemoveFavoriteMovie = (movie) => {
         const updatedUser = {
             ...user,
-            favoriteMovies: user.favoriteMovies.filter(id => id !== movieId)
+            favoriteMovies: user.favoriteMovies.filter(id => id !== movie)
         };
     
-        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${movie.id}`, {
             method: "PUT",
             body: JSON.stringify(updatedUser),
             headers: {
@@ -195,7 +195,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
             {favoriteMoviesList.map((movie) => (
             <Col className="mb-4" key={movie._id} x1={2} lg={3} md={4} xs={6}>
             <MovieCard key={movie.id} movie={movie} movies={movies} handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} />
-                <Button variant="outline-danger" onClick={() => handleRemoveFavoriteMovie(movie._id)}>Remove from favorites</Button>
+                <Button variant="outline-danger" onClick={() => handleRemoveFavoriteMovie(movie)}>Remove from favorites</Button>
                     </Col>
                     ))}
                 </Row>
