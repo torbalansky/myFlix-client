@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, Col, Button, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
-import { removeFavorite } from "../movie-view/movie-view.jsx";
+import { MovieView } from "../movie-view/movie-view.jsx";
 import "./profile-view.scss";
 
 export function ProfileView({ onLoggedOut, movies, updateUser }) {
@@ -73,7 +73,42 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 alert(e);
             });
     };
+
+    const handleRemoveFavoriteMovie = (movieId) => {
+        const updatedUser = {
+            ...user,
+            favoriteMovies: user.favoriteMovies.filter(id => id !== movieId)
+        };
     
+        fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
+            method: "PUT",
+            body: JSON.stringify(updatedUser),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                alert("Removing movie from favorites failed");
+                return false;
+            }
+        })
+        .then((user) => {
+            if (user) {
+                alert("Movie removed from favorites");
+                setUser(updatedUser);
+            }
+        })
+        .catch((e) => {
+            alert(e);
+        });
+    };
+    
+
+
   return (
     <>
     <Row>
@@ -157,18 +192,10 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 <Col xs={12}>
                     <h2>Favorite Movies</h2>
             </Col>
-                    {favoriteMoviesList.map((movies) => (
-                    <Col className="mb-4" key={movies._id} x1={2} lg={3} md={4} xs={6}>
-                    <MovieCard movie={movies} user={user} token={token} />
-                    <Button
-                            variant="danger"
-                            onClick={() => {
-                            if (confirm("Are you sure?")) {
-                                removeFavorite(_id);
-                            }
-                            }}
-                            >Remove from Favorites
-                        </Button>
+            {favoriteMoviesList.map((movie) => (
+            <Col className="mb-4" key={movie._id} x1={2} lg={3} md={4} xs={6}>
+            <MovieCard key={movie.id} movie={movie} movies={movies} handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} />
+                <Button variant="outline-danger" onClick={() => handleRemoveFavoriteMovie(movie._id)}>Remove from favorites</Button>
                     </Col>
                     ))}
                 </Row>
