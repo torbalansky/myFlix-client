@@ -7,7 +7,7 @@ import "./movie-card.scss";
 
 // Functional component named MovieCard
 // Two props, `movie` and `onMovieClick`
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie }) => {
   
     // Returns a div element that has an onClick event listener attached to it
     // The onMovieClick function is called with the `movie` object as a parameter when the div is clicked
@@ -16,8 +16,8 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Img variant="top" src={movie.image} className="card-img-top"/>
         <Card.Body>
           <Card.Title>{movie.title}</Card.Title>
-          <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button onClick={() => onMovieClick && onMovieClick(movie)} className="more-button">More</Button>
+          <Link to={`/movies/${encodeURIComponent(movie.id)}`}className="mt-auto">
+          <Button variant="primary">More</Button>
           </Link>
         </Card.Body>
       </Card>
@@ -29,7 +29,8 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-  }).isRequired
+  }).isRequired,
+  onMovieClick: PropTypes.func,
 };
 
 export default MovieCard;

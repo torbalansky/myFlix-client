@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Col, Button, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { MovieCard } from "../movie-card/movie-card";
+import { removeFavorite } from "../movie-view/movie-view.jsx";
 import "./profile-view.scss";
 
 export function ProfileView({ onLoggedOut, movies, updateUser }) {
@@ -11,7 +13,8 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
     const [Email, setEmail] = useState("");
     const [Birthday, setBirthday] = useState("");
 
-    let favoriteMovies = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
+    let favoriteMoviesList = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
+    console.log(favoriteMoviesList);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -74,7 +77,14 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
   return (
     <>
     <Row>
-      <Col md={6}>
+    <Col md={6}>
+        <Card className="mt-2 mb-3">
+            <Card.Body>
+            <Card.Title>Your info</Card.Title>
+            <p>Username: {user.Username}</p>
+            <p>Email: {user.Email}</p>
+    </Card.Body>
+  </Card>
         <Card>
           <Card.Body>
             <h4>Manage your account</h4>
@@ -115,12 +125,11 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 />
             </Form.Group>
             <Form.Group>
-                 <Form.Label>Birthday:</Form.Label>
+                <Form.Label>Birthday:</Form.Label>
                 <Form.Control
                 type="date"
                 value={Birthday}
                 onChange={e => setBirthday(e.target.value)}
-                
                 />
                 </Form.Group>
             <Button className="mt-3" variant="primary" type="submit">Update</Button>
@@ -145,26 +154,21 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
           <Row>
             <Col xs={12}>
                 <h2>Favorite Movies</h2>
-            </Col>
-            {favoriteMovies.map(({ movie }) => {
-                return (
-                <Col xs={12} md={6} lg={3} key={movie._id} className="fav-movies">
-                    <div className="mb-4">
-                    <MovieCard movie={movie} />
-                    <Button
+        </Col>
+                {favoriteMoviesList.map((movies) => (
+                <Col className="mb-4" key={movies._id} x1={2} lg={3} md={4} xs={6}>
+                <MovieCard movie={movies} user={user} token={token} />
+                <Button
                         variant="danger"
                         onClick={() => {
                         if (confirm("Are you sure?")) {
                             removeFavorite(_id);
                         }
                         }}
-                    >
-                        Remove from Favorites
+                        >Remove from Favorites
                     </Button>
-                    </div>
-                </Col>
-                );
-            })}
+                 </Col>
+                ))}
             </Row>
         </Card.Body>
       </Card>
