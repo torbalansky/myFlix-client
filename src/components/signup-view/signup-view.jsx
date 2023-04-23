@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
-import "./signup-view.scss";
 
 export const SignupView = () => {
     // Define states for each form input
@@ -41,13 +40,12 @@ export const SignupView = () => {
     return (
         <Container>
       <Row>
-        <Col>
+        <Col style={{ marginTop: "50px" }}>
           <CardGroup>
             <Card>
                 <Card.Body style={{ backgroundColor: "Honeydew" }}>
                 <Card.Header style={{ backgroundColor: "lightpink" }}>Register</Card.Header>
                     <Form onSubmit={handleSubmit}>
-                        
                         <Form.Group controledId="formUsername" class="mb-3 mt-3">
                             <Form.Label>Username:</Form.Label>
                             <Form.Control
@@ -61,7 +59,6 @@ export const SignupView = () => {
                                 placeholder='Enter your username...'
                             />
                         </Form.Group>
-                        
                         <Form.Group controlId="Password">
                             <Form.Label>Password:</Form.Label>
                             <Form.Control
@@ -75,7 +72,6 @@ export const SignupView = () => {
                                 placeholder='Your password must be 8 or more characters...'
                             />
                         </Form.Group>
-                        
                         <Form.Group controlId="Email" class="mb-3">
                             <Form.Label>E-mail:</Form.Label>
                             <Form.Control
@@ -86,7 +82,6 @@ export const SignupView = () => {
                                 placeholder='Enter your email...'
                             />
                         </Form.Group>
-                        
                         <Form.Group controlId="formDate" class="mb-3">
                             <Form.Label>Birthday:</Form.Label>
                             <Form.Control

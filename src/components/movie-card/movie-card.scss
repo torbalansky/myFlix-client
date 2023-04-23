@@ -1,14 +1,23 @@
-.h-100 {
- padding: 10px;
+.card-img-top {
+  height: 500px;
+  object-fit: contain;
+  padding-top: 2px;
+}
+  
+.card-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
-.card-img-top {
-    height: 300px;
-    object-fit: cover;
-  }
-  
-.movie-description {
-    height: 56px; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
+.card {
+  margin: 10px;
+}
+
+.card-title {
+  font-size: 18px; 
+}
+
+.more-button {
+  font-size: 14px;
 }

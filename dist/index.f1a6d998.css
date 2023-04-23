@@ -1,28 +1,4 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap";
-.card-img-top {
-  height: 500px;
-  object-fit: contain;
-  padding-top: 2px;
-}
-
-.card-body {
-  text-align: center;
-  flex-direction: column;
-  display: flex;
-}
-
-.card {
-  margin: 10px;
-}
-
-.card-title {
-  font-size: 18px;
-}
-
-.more-button {
-  font-size: 14px;
-}
-
 .navbar {
   height: 80px;
   width: 100%;
@@ -39,10 +15,9 @@
 }
 
 .me-auto {
-  background-color: #c752bf;
+  background-color: #0dcaf0;
   border-radius: 5px;
   margin-top: 5px;
-  padding-right: 10px;
 }
 
 .navbar-title {
@@ -53,12 +28,12 @@
 }
 
 .logout-link:hover {
-  background-color: #eb5f99;
+  background-color: #c76878;
   border-radius: 10px;
 }
 
 .home-link:hover, .profile-link:hover {
-  background-color: #47728d;
+  background-color: #06628d;
   border-radius: 10px;
 }
 
@@ -95,6 +70,20 @@
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: 2px 2px 5px #0000004d;
+}
+
+.profile-form button.primary {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.profile-form button:hover {
+  background-color: #0062cc;
 }
 
 :root {
@@ -12106,7 +12095,7 @@ textarea.form-control-lg {
 }
 
 body {
-  background-color: #5a5a61 !important;
+  background-color: #000 !important;
   font-family: Roboto, sans-serif !important;
 }
 
@@ -24145,4 +24134,4 @@ textarea.form-control-lg {
   }
 }
 
-/*# sourceMappingURL=index.e3f97e84.css.map */
+/*# sourceMappingURL=index.f1a6d998.css.map */
