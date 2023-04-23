@@ -114,7 +114,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
   return (
     <>
     <Row>
-        <Col md={6}>
+        <Col md={4}>
             <Card className="mt-2 mb-3">
             <Card.Body>
                 <Card.Title>Your info</Card.Title>
@@ -123,7 +123,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
         </Card.Body>
     </Card>
     </Col>
-        <Col md={6}>
+        <Col md={8}>
             <Card className="mt-2 mt-3">
             <Card.Body>
             <Card.Title>Manage your account</Card.Title>
@@ -174,6 +174,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 <Button className="mt-3" variant="primary" type="submit">Update</Button>
                 </Form>
                 <Button
+                className="delete-account-button"
                 variant="danger"
                 onClick={() => {
                     if (confirm("Are you sure?")) {

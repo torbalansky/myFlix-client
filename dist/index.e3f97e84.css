@@ -1,8 +1,7 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap";
 .card-img-top {
-  height: 500px;
-  object-fit: contain;
-  padding-top: 2px;
+  height: 400px;
+  object-fit: cover;
 }
 
 .card-body {
@@ -13,10 +12,6 @@
 
 .card {
   margin: 10px;
-}
-
-.card-title {
-  font-size: 18px;
 }
 
 .more-button {
@@ -77,11 +72,11 @@
 
 .profile-form {
   width: 100%;
-  max-width: 700px;
+  max-width: 600px;
   background-color: #f0f0f0;
   border-radius: 10px;
   margin: auto;
-  padding: 20px;
+  padding: 5px;
 }
 
 .profile-form label {
@@ -95,6 +90,12 @@
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: 2px 2px 5px #0000004d;
+}
+
+.delete-account-button {
+  width: 200px;
+  margin: auto;
+  display: block;
 }
 
 :root {

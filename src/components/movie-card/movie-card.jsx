@@ -15,7 +15,7 @@ export const MovieCard = ({ movie }) => {
       <Card className="h-60">
         <Card.Img variant="top" src={movie.image} className="card-img-top"/>
         <Card.Body>
-          <Card.Title>{movie.title}</Card.Title>
+          <Card.Title style={{fontSize: "16px"}}>{movie.title}</Card.Title>
           <Link to={`/movies/${encodeURIComponent(movie.id)}`}className="mt-auto">
           <Button variant="primary">More</Button>
           </Link>
