@@ -35,3 +35,23 @@ The objective of this project is to build a client-side movie app using React as
 - Genre view: Returns data about a genre, with a name and description, and displays example movies
 - Director view: Returns data about a director (name, bio, birth year, death year), and displays example movies
 - Profile view: Allows users to update their user info (username, password, email), allows existing users to deregister, displays favorite movies, and allows users to remove a movie from their list of favorites
+
+## API Endpoints
+
+The myFlix app uses a REST API with the following endpoints:
+
+*Movies*
+
+GET /movies - Returns a list of all movies
+GET /movies/:title - Returns data (description, genre, director, image URL, whether it's featured or not) about a single movie by title
+GET /movies/genres/:name - Returns data about a genre (description) by name/title
+GET /movies/directors/:name - Returns data about a director (bio, birth year, death year) by name
+Users
+
+POST /users - Allows new users to register
+GET /users/:username - Returns data about a user (username, email, date of birth)
+PUT /users/:username - Allows users to update their user info (username, password, email, date of birth)
+POST /users/:username/movies/:movieID - Allows users to add a movie to their list of favorites
+DELETE /users/:username/movies/:movieID - Allows users to remove a movie from their list of favorites
+DELETE /users/:username - Allows existing users to deregister
+Authentication
