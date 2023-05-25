@@ -9,6 +9,11 @@ import { ProfileView } from "../profile-view/profile-view";
 import { Row, Col } from 'react-bootstrap';
 import { removeListener } from "process";
 
+/**
+ * Represents the main view component.
+ * @returns {JSX.Element} The rendered main view component.
+ */
+
 export const MainView = () => {
 
   const storedUser = localStorage.getItem("user");
@@ -18,10 +23,22 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [viewMovies, setViewMovies] = useState(movies);
+
+  /**
+   * Updates the user data and stores it in local storage.
+   * @param {Object} user - The updated user data.
+   */
+
   const updateUser = user => {
     setUser(user);
     localStorage.setItem("user", JSON.stringify(user));
   } 
+
+  /**
+   * Handles the movie click event.
+   * @param {Object} movie - The clicked movie.
+   */
+  
   const handleMovieClick = (movie) => {
     console.log(`Clicked on movie with ID: ${movie.id}`);
   };

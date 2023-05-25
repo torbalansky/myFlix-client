@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
-
+/**
+ * Functional component representing the signup view.
+ * @returns {JSX.Element} The rendered signup view component.
+ */
 export const SignupView = () => {
     // Define states for each form input
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthday, setBirthday] = useState("");
-
+    /**
+         * Handles the form submission for user signup.
+         * @param {Object} event - The event object.
+         */
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent the default behavior of form submission
 

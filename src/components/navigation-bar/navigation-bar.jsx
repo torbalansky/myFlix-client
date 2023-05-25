@@ -4,14 +4,29 @@ import { useState, useEffect } from "react";
 
 import "./navigation-bar.scss";
 
+/**
+ * Functional component representing a navigation bar.
+ * @param {Object} props - The component props.
+ * @param {Object} props.user - The user object.
+ * @param {Function} props.onLoggedOut - The function to handle user logout.
+ * @param {Function} props.onSearch - The function to handle movie search.
+ * @returns {JSX.Element} The rendered navigation bar component.
+ */
+
 export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
   const [query, setQuery] = useState("");
-
+  /**
+     * Handles the search form submission.
+     * @param {Object} event - The event object.
+     */
   const handleSearch = (event) => {
     event.preventDefault();
     onSearch(query);
   };
-
+  /**
+     * Handles the input change in the search field.
+     * @param {Object} event - The event object.
+     */
   const handleInputChange = (event) => {
     const value = event.target.value;
     setQuery(value);

@@ -2,9 +2,21 @@ import React from "react";
 import { useState } from 'react';
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 
+/**
+ * Represents the login view component.
+ * @param {Object} props - The component properties.
+ * @param {Function} props.onLoggedIn - The callback function to be called after successful login.
+ * @returns {JSX.Element} The rendered login view component.
+ */
+
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  /**
+   * Handles the form submission.
+   * @param {Event} event - The form submit event.
+   */
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent the default behavior of the form which is to reload the entire page

@@ -5,6 +5,14 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 
+/**
+ * Functional component representing a movie view.
+ * @param {Object} props - The component props.
+ * @param {Array} props.movie - The array of movie objects.
+ * @param {Function} props.updateUser - The function to update the user.
+ * @returns {JSX.Element} The rendered movie view component.
+ */
+
 export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 	const [token, setToken] = useState(localStorage.getItem("token"));
@@ -22,6 +30,9 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
     window.scrollTo(0, 0);
   }, [movieId, user]);
   
+  /**
+     * Adds the current movie to the user's favorite movies.
+     */
 
   const addFavorite = () => {
     fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${currentMovie.id}`, {
@@ -47,6 +58,10 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
       });
   };  
 
+  /**
+   * Removes the current movie from the user's favorite movies.
+   */
+  
   const removeFavorite = () => {
     if (!user) {
       return;

@@ -5,6 +5,15 @@ import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import "./profile-view.scss";
 
+/**
+ * Functional component representing the profile view.
+ * @param {Object} props - The component props.
+ * @param {Function} props.onLoggedOut - The function to handle user logout.
+ * @param {Array} props.movies - The array of movies.
+ * @param {Function} props.updateUser - The function to update the user data.
+ * @returns {JSX.Element} The rendered profile view component.
+ */
+
 export function ProfileView({ onLoggedOut, movies, updateUser }) {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const [token, setToken] = useState(localStorage.getItem("token"));
@@ -15,7 +24,10 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
 
     let favoriteMoviesList = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
     console.log(favoriteMoviesList);
-
+    /**
+     * Handles the form submission for updating user data.
+     * @param {Object} event - The event object.
+     */
     const handleSubmit = event => {
         event.preventDefault();
 
@@ -54,7 +66,9 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 alert(e);
             });
     };
-
+    /**
+     * Deletes the user account.
+     */
     const deleteAccount = () => {
         console.log("doin")
         fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}`, {
@@ -73,7 +87,10 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 alert(e);
             });
     };
-
+    /**
+     * Handles the removal of a movie from the user's favorite movies list.
+     * @param {Object} movie - The movie object to be removed.
+     */
     const handleRemoveFavoriteMovie = (movie) => {
         const updatedUser = {
           ...user,

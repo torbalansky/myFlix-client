@@ -5,6 +5,15 @@ import { Button, Card } from 'react-bootstrap';
 
 import "./movie-card.scss";
 
+
+/**
+ * Functional component representing a movie card.
+ * @param {Object} props - The component props.
+ * @param {Object} props.movie - The movie object.
+ * @param {Function} [props.onMovieClick] - The function to be called when the movie card is clicked.
+ * @returns {JSX.Element} The rendered movie card component.
+ */
+
 // Functional component named MovieCard
 // Two props, `movie` and `onMovieClick`
 export const MovieCard = ({ movie }) => {
