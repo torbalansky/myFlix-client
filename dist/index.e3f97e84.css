@@ -5,7 +5,6 @@
 }
 
 .card-body {
-  text-align: center;
   flex-direction: column;
   display: flex;
 }
@@ -14,8 +13,47 @@
   margin: 10px;
 }
 
-.more-button {
-  font-size: 14px;
+.movie-details {
+  width: 100%;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 20px;
+  font-size: 24px;
+}
+
+.movie-description {
+  width: 100%;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #0ff !important;
+}
+
+.movie-poster {
+  float: right;
+  width: 400px;
+  height: 500px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-right: 50px;
+}
+
+.similar-movies-heading {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 24px;
+}
+
+.row-cols-1 {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.row-cols-md-3 .mb-4 {
+  max-width: 33.3333%;
+  flex: 0 0 33.3333%;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .navbar {
@@ -48,13 +86,15 @@
 }
 
 .logout-link:hover {
-  background-color: #eb5f99;
-  border-radius: 10px;
+  background-color: #c00050;
+  border-radius: 4px;
+  padding: 10px;
 }
 
 .home-link:hover, .profile-link:hover {
   background-color: #47728d;
-  border-radius: 10px;
+  border-radius: 4px;
+  padding: 10px;
 }
 
 .navbar-toggler-icon {
@@ -73,10 +113,11 @@
 .profile-form {
   width: 100%;
   max-width: 600px;
+  text-align: center;
   background-color: #f0f0f0;
   border-radius: 10px;
   margin: auto;
-  padding: 5px;
+  padding: 15px;
 }
 
 .profile-form label {
@@ -93,7 +134,8 @@
 }
 
 .delete-account-button {
-  width: 200px;
+  width: 100%;
+  max-width: 600px;
   margin: auto;
   display: block;
 }

@@ -28,14 +28,16 @@
 }
 
 .logout-link:hover {
-    background-color: rgb(235, 95, 153);
-    border-radius: 10px;
+    background-color: rgb(192, 0, 80);
+    border-radius: 4px;
+    padding: 10px;
 }
 
 .home-link:hover,
 .profile-link:hover {
     background-color: rgb(71, 114, 141);
-    border-radius: 10px;
+    border-radius: 4px;
+    padding: 10px;
 }
   
 .navbar-toggler-icon {

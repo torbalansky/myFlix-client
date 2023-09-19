@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Col, Row } from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
+import "./movie-view.scss";
 
 /**
  * Functional component representing a movie view.
@@ -91,37 +92,52 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
   console.log(user);
 
   return currentMovie ? (
-        <div className="row" style={{color: "white", marginLeft: "40px", marginTop: "20px", fontSize:"20px"}}>
+      <div className="row">
         <div className="col-md-6">
-        <div className="movie-details">
-          <h2 className="text-light">{currentMovie.title}</h2>
-          <p className="text-light">Directed by {currentMovie.director}</p>
-          <p className="text-light">Genre: {currentMovie.genre}</p>
-          <p className="text-light">Stars: {currentMovie.stars.join(', ')}</p>
-          <p><strong>{currentMovie.description}</strong></p>
-          <div className="mb-3">
-          <Button variant="btn bg-success" onClick={() => addFavorite(movie)} style={{color: "white"}}>Add to Favorites</Button>  
-          <Button className="btn btn-danger ms-2" onClick={removeFavorite}>Remove from favorites</Button> 
-      </div>
-          <Link to={"/"} className="btn btn-primary movie-view-back-button" style={{marginTop: "20px", marginBottom: "20px", marginLeft: "10px"}}>Back</Link>
+          <div className="movie-details">
+            <h2 className="text-light">{currentMovie.title}</h2>
+            <p className="text-light">Directed by {currentMovie.director}</p>
+            <p className="text-light">Genre: {currentMovie.genre}</p>
+            <p className="text-light">Stars: {currentMovie.stars.join(', ')}</p>
+            <p style={{ color: "white" }}>{currentMovie.description}</p>
+            <div className="navigation">
+              <Button
+                variant="btn bg-success"
+                onClick={() => addFavorite(movie)}
+                style={{ color: "white" }}
+              >
+                Add to Favorites
+              </Button>
+              <Button className="btn btn-danger ms-2" onClick={removeFavorite}>
+                Remove from favorites
+              </Button>
+              <Link to={"/"} className="btn btn-primary ms-2">
+                Back
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
         <div className="col-md-6">
-          <img src={currentMovie.image} className="movie-poster" alt={currentMovie.title} style={{width: "400px", float: "right", marginRight: "40px"}}/>
-      </div>
-        <div className="col-md-12">
+          <div className="image-container" style={{ position: "relative" }}>
+            <img
+              src={currentMovie.image}
+              className="movie-poster"
+              alt={currentMovie.title}
+            />
+          </div>
+        </div>
+        <div className="col-md-8">
           <h3 className="text-light similar-movies-heading">Similar movies:</h3>
           <Row className="row-cols-1 row-cols-md-3 g-4">
-            {similarMovies.map(movie => (
+            {similarMovies.map((movie) => (
               <Col className="mb-4" key={movie.id}>
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie}/>
               </Col>
-          ))}
-          
-        </Row>
+            ))}
+          </Row>
+        </div>
       </div>
-    </div>
-  ) : null;
+    ) : null;    
 };
 
 MovieView.propTypes = {

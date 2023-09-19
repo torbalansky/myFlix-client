@@ -17,18 +17,40 @@ import "./movie-card.scss";
 // Functional component named MovieCard
 // Two props, `movie` and `onMovieClick`
 export const MovieCard = ({ movie }) => {
+
+  const overlayStyle = {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    background: "rgba(0, 0, 0, 0.7)", 
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
+    fontSize: "26px",
+    fontWeight: "bold",
+    padding: "10px",
+  };
   
     // Returns a div element that has an onClick event listener attached to it
     // The onMovieClick function is called with the `movie` object as a parameter when the div is clicked
+const cardStyle = { marginTop: "20px"};
+const descriptionWords = movie.description.split(" ").slice(0, 10).join(" ");
+
     return (
-      <Card className="h-60">
+      <Card className="h-60" style={cardStyle}>
         <Card.Img variant="top" src={movie.image} className="card-img-top"/>
-        <Card.Body>
-          <Card.Title style={{fontSize: "16px"}}>{movie.title}</Card.Title>
-          <Link to={`/movies/${encodeURIComponent(movie.id)}`}className="mt-auto">
-          <Button variant="primary">More</Button>
+        <div style={overlayStyle}>
+        {movie.title}
+        <p style={{fontSize:"14px"}}>{descriptionWords}...</p>
+        <div className="text-center mt-2">
+          <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+          <Button variant="primary">Read more</Button>
           </Link>
-        </Card.Body>
+          </div>
+        </div>
       </Card>
     );
   };

@@ -132,7 +132,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
     <>
     <Row>
         <Col md={4}>
-            <Card className="mt-2 mb-3">
+            <Card className="mt-3 mb-3">
             <Card.Body>
                 <Card.Title>Your info</Card.Title>
                 <p><strong>Username:</strong> {user.Username}</p>
@@ -188,7 +188,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                     onChange={e => setBirthday(e.target.value)}
                     />
                     </Form.Group>
-                <Button className="mt-3" variant="primary" type="submit">Update</Button>
+                <Button className="mt-3" variant="warning" type="submit" style={{ fontSize: "20px", fontWeight: "bold", width: "200px" }}>Update</Button>
                 </Form>
                 <Button
                 className="delete-account-button"
@@ -205,7 +205,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
             </Card>
         </Col>
         </Row>
-        <div style={{ padding: "0 20px" }}>
+        <div lassName="d-flex flex-column" style={{ padding: "0 20px" }}>
         <Card>
             <Card.Body>
             <Row>
