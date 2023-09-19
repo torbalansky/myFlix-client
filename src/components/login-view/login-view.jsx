@@ -26,7 +26,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password,
     };
     // Send a POST request to the login endpoint with the user data in the request body
-    fetch('https://torbalansk-myflix-app.herokuapp.com/login', {
+    fetch('https://movie-api-6-git-master-torbalansky.vercel.app/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

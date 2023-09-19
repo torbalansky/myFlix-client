@@ -35,7 +35,7 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
      */
 
   const addFavorite = () => {
-    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${currentMovie.id}`, {
+    fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -66,7 +66,7 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
     if (!user) {
       return;
     }
-    fetch(`https://torbalansk-myflix-app.herokuapp.com/users/${user.Username}/movies/${currentMovie.id}`, {
+    fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     })

@@ -26,7 +26,7 @@ export const SignupView = () => {
         };
 
         // Send a POST request to the server to create a new user
-        fetch('https://torbalansk-myflix-app.herokuapp.com/users', {
+        fetch('https://movie-api-6-git-master-torbalansky.vercel.app/users', {
             method: "POST",
             body:JSON.stringify(data),
             headers: {

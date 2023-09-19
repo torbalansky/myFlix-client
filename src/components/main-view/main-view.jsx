@@ -48,7 +48,7 @@ export const MainView = () => {
       return;
      }
     setLoading(true);
-    fetch("https://torbalansk-myflix-app.herokuapp.com/movies", {
+    fetch("https://movie-api-6-git-master-torbalansky.vercel.app/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
