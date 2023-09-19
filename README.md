@@ -1,10 +1,10 @@
-# myFlix-client
+## myFlix-client
 
-## Objective
+### Objective
 
 The objective of this project is to build a client-side movie app using React as the front-end and a REST API as the back-end.
 
-## Built with
+### Built with
 
 - React
 - React Bootstrap
@@ -13,7 +13,11 @@ The objective of this project is to build a client-side movie app using React as
 - HTML
 - CSS/SCSS
 
-## Features
+myFlix is hosted on Netlify. Click the link below to access the app:
+
+[Visit myFlix on Netlify](https://myflix-torbalansky.netlify.app/)
+
+### Features
 
 - Return a list of ALL movies to the user
 - Return data (description, genre, director, image URL, whether it's featured or not) about a single movie by title to the user
@@ -26,7 +30,7 @@ The objective of this project is to build a client-side movie app using React as
 - Allow existing users to deregister
 - JWT token-based user authentication
 
-## Views
+### Views
 
 - Main view: Returns a list of ALL movies to the user (each listed item with an image and title), sorting and filtering, and the ability to select a movie for more details
 - Single movie view: Returns data (description, genre, director, image) about a single movie to the user and allows users to add/remove a movie to their list of favorites
@@ -36,7 +40,7 @@ The objective of this project is to build a client-side movie app using React as
 - Director view: Returns data about a director (name, bio, birth year, death year), and displays example movies
 - Profile view: Allows users to update their user info (username, password, email), allows existing users to deregister, displays favorite movies, and allows users to remove a movie from their list of favorites
 
-## API Endpoints
+### API Endpoints
 
 The myFlix app uses a REST API with the following endpoints:
 
