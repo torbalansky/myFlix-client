@@ -63,19 +63,10 @@
   justify-content: center;
 }
 
-.nav-link {
-  margin-top: 5px;
-  margin-left: 10px;
-  color: #fff !important;
-  font-size: 20px !important;
-  font-weight: bold !important;
-}
-
 .me-auto {
-  background-color: #c752bf;
+  background-color: #e854de;
   border-radius: 5px;
   margin-top: 5px;
-  padding-right: 10px;
 }
 
 .navbar-title {
@@ -83,12 +74,6 @@
   font-weight: bold;
   color: #eb5fcd !important;
   font-size: 40px !important;
-}
-
-.logout-link:hover {
-  background-color: #c00050;
-  border-radius: 4px;
-  padding: 10px;
 }
 
 .home-link:hover, .profile-link:hover {
