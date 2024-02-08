@@ -25,12 +25,16 @@ export const SignupView = () => {
             Birthday: birthday
         };
 
+        // Retrieve JWT token from local storage
+        const token = localStorage.getItem('token');
+
         // Send a POST request to the server to create a new user
         fetch('https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users', {
             method: "POST",
             body:JSON.stringify(data),
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${token}` // Include JWT token in Authorization header
             }
         }).then((response) => {
             if (response.ok) {
