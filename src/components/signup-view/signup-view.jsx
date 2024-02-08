@@ -33,8 +33,7 @@ export const SignupView = () => {
             method: "POST",
             body:JSON.stringify(data),
             headers: {
-                "Content-type": "application/json",
-                "Authorization": `Bearer ${token}` // Include JWT token in Authorization header
+                "Content-type": "application/json"
             }
         }).then((response) => {
             if (response.ok) {
