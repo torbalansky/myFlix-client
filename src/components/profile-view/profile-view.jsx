@@ -40,7 +40,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
 
         console.log("Submitting data: ", data);
 
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {

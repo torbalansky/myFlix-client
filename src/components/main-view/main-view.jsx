@@ -48,7 +48,7 @@ export const MainView = () => {
       return;
      }
     setLoading(true);
-    fetch("https://movie-api-6-git-master-torbalansky.vercel.app/movies", {
+    fetch("https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())

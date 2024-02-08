@@ -27228,7 +27228,7 @@ const MainView = ()=>{
     (0, _react.useEffect)(()=>{
         if (!token) return;
         setLoading(true);
-        fetch("https://movie-api-6-git-master-torbalansky.vercel.app/movies", {
+        fetch("https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -39690,7 +39690,7 @@ const MovieView = ({ movie, updateUser, favoriteMovies })=>{
     /**
      * Adds the current movie to the user's favorite movies.
      */ const addFavorite = ()=>{
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -39974,7 +39974,7 @@ const LoginView = ({ onLoggedIn })=>{
             Password: password
         };
         // Send a POST request to the login endpoint with the user data in the request body
-        fetch("https://movie-api-6-git-master-torbalansky.vercel.app/login", {
+        fetch("https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -40617,7 +40617,7 @@ function ProfileView({ onLoggedOut, movies, updateUser }) {
             Birthday
         };
         console.log("Submitting data: ", data);
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
