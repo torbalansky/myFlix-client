@@ -26,7 +26,7 @@ export const SignupView = () => {
         };
 
         // Send a POST request to the server to create a new user
-        fetch('https://myflix-torbalansky.netlify.app/users', {
+        fetch('https://movie-api-eqfh-git-master-torbalansky.vercel.app/users', {
             method: "POST",
             body:JSON.stringify(data),
             headers: {
@@ -42,7 +42,7 @@ export const SignupView = () => {
         });
     };
 
-    // Render the form with inputs and a submit button
+    // Render the form with inputs
     return (
         <Container>
       <Row>

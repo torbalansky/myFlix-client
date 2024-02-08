@@ -46653,7 +46653,7 @@ const SignupView = ()=>{
             Birthday: birthday
         };
         // Send a POST request to the server to create a new user
-        fetch("https://myflix-torbalansky.netlify.app/users", {
+        fetch("https://movie-api-eqfh-git-master-torbalansky.vercel.app/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -46666,7 +46666,7 @@ const SignupView = ()=>{
             } else alert("Signup failed");
         });
     };
-    // Render the form with inputs and a submit button
+    // Render the form with inputs
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
