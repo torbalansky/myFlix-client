@@ -71,7 +71,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
      */
     const deleteAccount = () => {
         console.log("doin")
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
         })
@@ -99,7 +99,7 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
         
         console.log('updatedUser', updatedUser); 
       
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}`, {
           method: "PUT",
           body: JSON.stringify(updatedUser),
           headers: {

@@ -67,7 +67,7 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
     if (!user) {
       return;
     }
-    fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
+    fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     })
