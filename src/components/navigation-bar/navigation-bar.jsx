@@ -1,6 +1,7 @@
 import { Navbar, Container, Nav, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { SiThemoviedatabase } from "react-icons/si";
 
 import "./navigation-bar.scss";
 
@@ -19,19 +20,19 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
   };
 
   return (
-    <Navbar bg="dark" expand="lg">
+    <Navbar expand="lg">
       <Container fluid>
-        <Navbar.Brand as={Link} to="/" className="navbar-title" onClick={() => onSearch("")}>MyFlix</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="navbar-title text-pink" onClick={() => onSearch("")}> <SiThemoviedatabase className="mb-2 mx-2"/>MyFlix</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {!user && (
               <>
                 <Nav.Item>
-                  <Button as={Link} to="/Signup" variant="outline-light" className="me-2">Signup</Button>
+                  <Button as={Link} to="/Signup"  className="me-2 btn text-black bg-white">Signup</Button>
                 </Nav.Item>
                 <Nav.Item>
-                  <Button as={Link} to="/Login" variant="outline-light">Login</Button>
+                  <Button as={Link} to="/Login" className="me-2 btn text-black bg-white">Login</Button>
                 </Nav.Item>
               </>
             )}
