@@ -29,7 +29,7 @@ export const SignupView = () => {
         const token = localStorage.getItem('token');
 
         // Send a POST request to the server to create a new user
-        fetch('https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users', {
+        fetch('https://movie-api-eqfh.vercel.app/users', {
             method: "POST",
             body:JSON.stringify(data),
             headers: {

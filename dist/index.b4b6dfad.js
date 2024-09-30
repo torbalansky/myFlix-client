@@ -39717,7 +39717,7 @@ const MovieView = ({ movie, updateUser, favoriteMovies })=>{
    * Removes the current movie from the user's favorite movies.
    */ const removeFavorite = ()=>{
         if (!user) return;
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -40643,7 +40643,7 @@ function ProfileView({ onLoggedOut, movies, updateUser }) {
      * Deletes the user account.
      */ const deleteAccount = ()=>{
         console.log("doin");
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -40666,7 +40666,7 @@ function ProfileView({ onLoggedOut, movies, updateUser }) {
             favoriteMovies: user.favoriteMovies.filter((id)=>id !== movie.id)
         };
         console.log("updatedUser", updatedUser);
-        fetch(`https://movie-api-6-git-master-torbalansky.vercel.app/users/${user.Username}`, {
+        fetch(`https://movie-api-eqfh-mnccd0sxy-torbalansky.vercel.app/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(updatedUser),
             headers: {
