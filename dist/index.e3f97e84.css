@@ -13,109 +13,329 @@
   margin: 10px;
 }
 
-.movie-details {
-  width: 100%;
-  margin-left: 50px;
-  margin-right: 50px;
+.movie-view-container {
+  color: #fff;
+  background-color: #121212a3;
+  min-height: 100vh;
   padding: 20px;
-  font-size: 24px;
 }
 
-.movie-description {
-  width: 100%;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #0ff !important;
-}
-
-.movie-poster {
-  float: right;
-  border: 1px solid #fff;
+.movie-view-container .movie-poster {
+  object-fit: cover;
   border-radius: 10px;
+  max-height: 450px;
+}
+
+.movie-view-container .movie-details {
+  color: #ccc;
+  background-color: #0000006f;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 15px #000c;
+}
+
+.movie-view-container .movie-details .movie-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.movie-view-container .btn {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color .2s, transform .1s;
+}
+
+.movie-view-container .btn:hover {
+  transform: translateY(-2px);
+}
+
+.movie-view-container .btn-sm {
+  padding: .3rem .6rem;
+  font-size: .9rem;
+}
+
+.movie-view-container .similar-movies-heading {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.container {
+  color: #474646;
+  margin-top: 50px;
+}
+
+.login-card {
+  border: none;
   width: 400px;
-  height: 500px;
-  margin-top: 20px;
-  margin-right: 50px;
+  background-color: #00000041 !important;
 }
 
-.similar-movies-heading {
-  margin-top: 20px;
-  padding: 10px;
+.login-card .card-header {
+  color: #fff;
+  text-align: center;
   font-size: 24px;
+  font-weight: bold;
 }
 
-.row-cols-1 {
-  flex-wrap: wrap;
-  display: flex;
+.login-card .card-body {
+  padding: 20px;
 }
 
-.row-cols-md-3 .mb-4 {
-  flex: 0 0 33.3333%;
-  max-width: 33.3333%;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.navbar {
-  border-radius: 5px;
-  justify-content: center;
-  width: 100%;
-  height: 80px;
-  background-color: #61e668f1 !important;
-}
-
-.me-auto .btn {
-  border-radius: 5px;
+.login-card .card-body .form-label {
+  color: #fff;
   margin-top: 5px;
-  background-color: pink !important;
+  font-weight: bold;
+}
+
+.login-card .card-body .form-control {
+  border: 1px solid #5264ec;
+  border-radius: 20px;
+  transition: border-color .3s;
+}
+
+.login-card .card-body .form-control:focus {
+  border-color: #61e668;
+  outline: none;
+}
+
+.login-card .card-body button {
+  color: #fff;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transition: background-color .3s, transform .3s;
+  background-color: #00f !important;
   border: none !important;
 }
 
-.me-auto .btn:hover {
+.login-card .card-body button:hover {
+  transform: scale(1.05);
+  background-color: #8000ff !important;
+}
+
+@media (width <= 1000px) {
+  .container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .card-body {
+    padding: 25px;
+  }
+
+  button {
+    font-size: 44px;
+  }
+}
+
+.container {
+  color: #474646;
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.signup-card {
+  border: none;
+  width: 400px;
+  background-color: #00000041 !important;
+}
+
+.signup-card .card-header {
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.signup-card .card-body {
+  padding: 10px;
+}
+
+.signup-card .card-body .form-label {
+  color: #fff;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.signup-card .card-body .form-control {
+  border: 1px solid #5264ec;
+  border-radius: 20px;
+  transition: border-color .3s;
+}
+
+.signup-card .card-body .form-control:focus {
+  border-color: #61e668;
+  outline: none;
+}
+
+.signup-card .card-body button {
+  color: #fff;
   border-radius: 5px;
-  background-color: #0ff !important;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transition: background-color .3s, transform .3s;
+  background-color: #00f !important;
+  border: none !important;
+}
+
+.signup-card .card-body button:hover {
+  transform: scale(1.05);
+  background-color: #8000ff !important;
+}
+
+@media (width <= 1000px) {
+  .container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .card-body {
+    padding: 25px;
+  }
+
+  button {
+    font-size: 44px;
+  }
+}
+
+.navbar {
+  background: none;
+  height: auto;
+  width: 100% !important;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .navbar-title {
-  margin-top: 5px;
   font-weight: bold;
-  color: #eb5fcd !important;
-  font-size: 40px !important;
+  transition: transform .3s;
+  color: #fff !important;
+  font-size: 50px !important;
 }
 
-.home-link, .profile-link, .logout-link {
-  border-radius: 4px;
-  padding: 10px;
-  color: #5264ec !important;
-  font-weight: bold !important;
+.navbar-title:hover {
+  transform: scale(1.1);
 }
 
-.home-link:hover, .profile-link:hover, .logout-link:hover {
-  background-color: #cefc00;
-  border-radius: 4px;
-  padding: 10px;
+@media (width <= 768px) {
+  .navbar-title {
+    font-size: 18px;
+  }
 }
 
-.navbar-toggler-icon {
-  background-color: #fff;
+@media (width <= 576px) {
+  .navbar-title {
+    font-size: 14px;
+  }
 }
 
 .navbar-collapse {
   z-index: 9999;
 }
 
+.me-auto {
+  align-items: center;
+  display: flex;
+}
+
+.me-auto .btn {
+  border-radius: 20px;
+  margin: 0 5px;
+  transition: background-color .3s, transform .3s;
+  background-color: #fff !important;
+  border: none !important;
+}
+
+.me-auto .btn:hover {
+  transform: scale(1.05);
+  background-color: #f8e6fc !important;
+}
+
+.home-link, .profile-link, .logout-link {
+  border-bottom: 2px solid #d0ff00;
+  margin-right: 15px;
+  padding: 10px 15px;
+  transition: background-color .3s;
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.home-link:hover, .profile-link:hover, .logout-link:hover {
+  background-color: #333e01;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+
+.nav-menu {
+  display: flex;
+  position: absolute;
+  right: 250px;
+}
+
 .d-flex {
-  width: 400px;
+  width: 200px;
   margin-top: 5px;
+}
+
+@media (width <= 896px) {
+  .home-link, .profile-link, .logout-link {
+    display: none;
+  }
+
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .navbar-title {
+    font-size: 80px;
+  }
+
+  .form {
+    display: none;
+  }
+}
+
+.profile-view {
+  justify-content: space-between;
+  padding: 10px;
+  display: flex;
+}
+
+.favorite-movies-col {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.favorite-movies-card, .user-info-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  width: 600px;
+  height: 100%;
+  padding: 20px;
+  box-shadow: 0 2px 10px #0000001a;
 }
 
 .profile-form {
   text-align: center;
+  color: #000;
   background-color: #f0f0f0;
   border-radius: 10px;
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
   padding: 15px;
 }
 
@@ -133,10 +353,40 @@
 }
 
 .delete-account-button {
+  border-radius: 5px;
   width: 100%;
-  max-width: 600px;
-  margin: auto;
+  margin: 10px 0;
+  font-weight: bold;
   display: block;
+}
+
+.favorite-movies-card h2, .user-info-card h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.favorite-movies-grid, .favorite-movies-card {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.movie-card {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (width <= 968px) {
+  .profile-view {
+    flex-direction: column !important;
+    display: flex !important;
+  }
+
+  .favorite-movies-card, .user-info-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
 :root {
@@ -24240,9 +24490,9 @@ textarea.form-control-lg {
 }
 
 body {
-  color: #fff !important;
-  background-color: #252534 !important;
-  font-family: Roboto, sans-serif !important;
+  color: #fff;
+  background: linear-gradient(90deg, #05000fd9, #3a8cffb0);
+  font-family: Roboto, sans-serif;
 }
 
 /*# sourceMappingURL=index.e3f97e84.css.map */

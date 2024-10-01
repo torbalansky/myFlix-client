@@ -1,0 +1,72 @@
+.container {
+  margin-top: 50px;
+  color: rgb(71, 70, 70);
+}
+
+.login-card {
+  border: none;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.253) !important;
+
+  .card-header {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .card-body {
+    padding: 20px;
+
+    .form-label {
+      font-weight: bold;
+      color: white;
+      margin-top: 5px;
+    }
+
+    .form-control {
+      border-radius: 20px;
+      border: 1px solid rgb(82, 100, 236);
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: rgb(97, 230, 104);
+      }
+    }
+
+    button {
+      background-color: blue !important;
+      border: none !important;
+      border-radius: 5px;
+      color: rgb(255, 255, 255);
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      width: 100%;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        background-color: rgb(128, 0, 255) !important;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .card-body {
+    padding: 25px;
+  }
+
+  button {
+    font-size: 44px;
+  }
+}

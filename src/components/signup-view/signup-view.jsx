@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
+import './signup-view.scss'
 /**
  * Functional component representing the signup view.
  * @returns {JSX.Element} The rendered signup view component.
@@ -45,15 +46,14 @@ export const SignupView = () => {
         });
     };
 
-    // Render the form with inputs
     return (
         <Container>
       <Row>
-        <Col style={{ marginTop: "50px" }}>
+        <Col>
           <CardGroup>
-            <Card>
-                <Card.Body style={{ backgroundColor: "Honeydew" }}>
-                <Card.Header style={{ backgroundColor: "lightpink" }}>Register</Card.Header>
+            <Card className="signup-card">
+                <Card.Body>
+                <Card.Header>Register</Card.Header>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controledId="formUsername" class="mb-3 mt-3">
                             <Form.Label>Username:</Form.Label>
@@ -61,8 +61,8 @@ export const SignupView = () => {
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                required // make the input required
-                                minLength="4" // set a minimum length of 4 characters
+                                required
+                                minLength="4"
                                 pattern="^[A-Za-z0-9 .,'\\-!?%&]+$"
                                 title="Username should contain more than 5 characters, may only contain letters, numbers and special characters: .,'-!?%&"
                                 placeholder='Enter your username...'

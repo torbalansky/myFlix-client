@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 import { Button, Form, Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
-
+import "./login-view.scss";
 /**
  * Represents the login view component.
  * @param {Object} props - The component properties.
@@ -53,11 +53,11 @@ export const LoginView = ({ onLoggedIn }) => {
   return (
       <Container>
         <Row>
-          <Col md={10}>
+          <Col>
             <CardGroup>
-              <Card>
-                <Card.Body style={{ backgroundColor: "Honeydew" }}>
-                  <Card.Header style={{ backgroundColor: "lightgreen" }}>Login</Card.Header>
+              <Card className="login-card">
+                <Card.Body>
+                  <Card.Header>Login</Card.Header>
                   <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formUsername">
                       <Form.Label>Username:</Form.Label>

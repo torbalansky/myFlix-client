@@ -6,23 +6,15 @@ import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import "./movie-view.scss";
 
-/**
- * Functional component representing a movie view.
- * @param {Object} props - The component props.
- * @param {Array} props.movie - The array of movie objects.
- * @param {Function} props.updateUser - The function to update the user.
- * @returns {JSX.Element} The rendered movie view component.
- */
-
 export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-	const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const { movieId } = useParams();
   const currentMovie = movie.find(m => m.id === movieId);
-  
+
   const similarMovies = currentMovie
-  ? movie.filter(m => m.genre === currentMovie.genre && m.id !== currentMovie.id)
-  : [];
+    ? movie.filter(m => m.genre === currentMovie.genre && m.id !== currentMovie.id)
+    : [];
 
   const [isFavorite, setIsFavorite] = useState(user && user.favoriteMovies && user.favoriteMovies.includes(movieId));
 
@@ -30,10 +22,6 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
     setIsFavorite(user && Array.isArray(user.favoriteMovies) && user.favoriteMovies.includes(movieId));
     window.scrollTo(0, 0);
   }, [movieId, user]);
-  
-  /**
-     * Adds the current movie to the user's favorite movies.
-     */
 
   const addFavorite = () => {
     fetch(`https://movie-api-eqfh.vercel.app/users/${user.Username}/movies/${currentMovie.id}`, {
@@ -57,12 +45,8 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
       .catch((error) => {
         console.log(error);
       });
-  };  
+  };
 
-  /**
-   * Removes the current movie from the user's favorite movies.
-   */
-  
   const removeFavorite = () => {
     if (!user) {
       return;
@@ -86,68 +70,67 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
         alert(e);
       });
   };
-  
-  console.log(updateUser);
-  console.log(currentMovie);
-  console.log(user);
 
   return currentMovie ? (
-      <div className="row">
-        <div className="col-md-6">
-          <div className="movie-details">
-            <h2 className="text-light">{currentMovie.title}</h2>
-            <p className="text-light">Directed by {currentMovie.director}</p>
-            <p className="text-light">Genre: {currentMovie.genre}</p>
-            <p className="text-light">Stars: {currentMovie.stars.join(', ')}</p>
-            <p style={{ color: "white" }}>{currentMovie.description}</p>
-            <div className="navigation">
-              <Button
-                variant="btn bg-success"
-                onClick={() => addFavorite(movie)}
-                style={{ color: "white" }}
-              >
-                Add to Favorites
-              </Button>
-              <Button className="btn btn-danger ms-2" onClick={removeFavorite}>
-                Remove from favorites
-              </Button>
-              <Link to={"/"} className="btn btn-primary ms-2">
-                Back
+    <div className="movie-view-container container-fluid p-4">
+      <Row className="justify-content-center mb-4">
+        <Col md={5} className="text-center">
+          <img src={currentMovie.image} alt={currentMovie.title} className="movie-poster img-fluid rounded shadow-lg" />
+        </Col>
+        <Col md={7}>
+          <div className="movie-details p-4">
+            <h1 className="text-light mb-3">{currentMovie.title}</h1>
+            <p className="text-muted">Directed by <span className="fw-bold">{currentMovie.director}</span></p>
+            <p className="text-muted">Genre: <span className="fw-bold">{currentMovie.genre}</span></p>
+            <p className="text-muted">Starring: {currentMovie.stars.join(', ')}</p>
+            <p className="movie-description text-light">{currentMovie.description}</p>
+            <div className="d-flex mt-4">
+              {!isFavorite ? (
+                <Button variant="success" onClick={addFavorite} className="btn-sm me-2">
+                  Add to Favorites
+                </Button>
+              ) : (
+                <Button variant="danger" onClick={removeFavorite} className="btn-sm me-2">
+                  Remove from Favorites
+                </Button>
+              )}
+              <Link to="/" className="btn btn-outline-light btn-sm">
+                Back to Movies
               </Link>
             </div>
           </div>
-        </div>
-        <div className="col-md-6">
-          <div className="image-container" style={{ position: "relative" }}>
-            <img
-              src={currentMovie.image}
-              className="movie-poster"
-              alt={currentMovie.title}
-            />
-          </div>
-        </div>
-        <div className="col-md-8">
-          <h3 className="text-light similar-movies-heading">Similar movies:</h3>
-          <Row className="row-cols-1 row-cols-md-3 g-4">
-            {similarMovies.map((movie) => (
-              <Col className="mb-4" key={movie.id}>
-                <MovieCard movie={movie}/>
-              </Col>
-            ))}
+        </Col>
+      </Row>
+      <Row className="mt-5">
+        <Col>
+          <h2 className="text-light text-center">Similar Movies</h2>
+          <Row className="g-4">
+            {similarMovies.length > 0 ? (
+              similarMovies.map((movie) => (
+                <Col xs={12} sm={6} md={4} lg={3} key={movie.id}>
+                  <MovieCard movie={movie} />
+                </Col>
+              ))
+            ) : (
+              <p className="text-center text-light">No similar movies found.</p>
+            )}
           </Row>
-        </div>
-      </div>
-    ) : null;    
+        </Col>
+      </Row>
+    </div>
+  ) : null;
 };
 
 MovieView.propTypes = {
-  movie: PropTypes.arrayOf(PropTypes.shape({
+  movie: PropTypes.arrayOf(
+    PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       genre: PropTypes.string.isRequired,
       director: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired
-  }).isRequired),
+    })
+  ).isRequired,
   updateUser: PropTypes.func.isRequired
 };

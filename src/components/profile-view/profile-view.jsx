@@ -1,7 +1,6 @@
 import { useState } from "react";
 import React from 'react';
 import { Card, Col, Button, Row, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 import "./profile-view.scss";
 
@@ -13,7 +12,6 @@ import "./profile-view.scss";
  * @param {Function} props.updateUser - The function to update the user data.
  * @returns {JSX.Element} The rendered profile view component.
  */
-
 export function ProfileView({ onLoggedOut, movies, updateUser }) {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const [token, setToken] = useState(localStorage.getItem("token"));
@@ -22,12 +20,10 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
     const [Email, setEmail] = useState("");
     const [Birthday, setBirthday] = useState("");
 
-    let favoriteMoviesList = user && user.favoriteMovies && movies ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) : [];
-    console.log(favoriteMoviesList);
-    /**
-     * Handles the form submission for updating user data.
-     * @param {Object} event - The event object.
-     */
+    let favoriteMoviesList = user && user.favoriteMovies && movies 
+        ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) 
+        : [];
+
     const handleSubmit = event => {
         event.preventDefault();
 
@@ -36,29 +32,27 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
             Password,
             Email,
             Birthday
-        }
-
-        console.log("Submitting data: ", data);
+        };
 
         fetch(`https://movie-api-eqfh.vercel.app/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
             },
         })
             .then((response) => {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    alert("Changing userdata failed");
+                    alert("Changing user data failed");
                     return false;
                 }
             })
             .then((user) => {
                 if (user) {
-                    alert("Successfully changed userdata");
+                    alert("Successfully changed user data");
                     updateUser(user);
                 }
             })
@@ -66,11 +60,8 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 alert(e);
             });
     };
-    /**
-     * Deletes the user account.
-     */
+
     const deleteAccount = () => {
-        console.log("doin")
         fetch(`https://movie-api-eqfh.vercel.app/users/${user.Username}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
@@ -87,141 +78,136 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
                 alert(e);
             });
     };
-    /**
-     * Handles the removal of a movie from the user's favorite movies list.
-     * @param {Object} movie - The movie object to be removed.
-     */
+
     const handleRemoveFavoriteMovie = (movie) => {
         const updatedUser = {
-          ...user,
-          favoriteMovies: user.favoriteMovies.filter(id => id !== movie.id)
+            ...user,
+            favoriteMovies: user.favoriteMovies.filter(id => id !== movie.id)
         };
-        
-        console.log('updatedUser', updatedUser); 
-      
-        fetch(`https://movie-api-eqfh.vercel.app/users/${user.Username}`, {
-          method: "PUT",
-          body: JSON.stringify(updatedUser),
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              alert("Removing movie from favorites failed");
-              return false;
-            }
-          })
-          .then((user) => {
-            if (user) {
-              alert("Movie removed from favorites");
-              setUser(updatedUser);
-              localStorage.setItem("user", JSON.stringify(updatedUser));
-            }
-          })
-          .catch((e) => {
-            alert(e);
-          });
-      };
-      
 
-  return (
-    <>
-    <Row>
-        <Col md={4}>
-            <Card className="mt-3 mb-3">
-            <Card.Body>
-                <Card.Title>Your info</Card.Title>
-                <p><strong>Username:</strong> {user.Username}</p>
-                <p><strong>Email:</strong> {user.Email}</p>
-        </Card.Body>
-    </Card>
-    </Col>
-        <Col md={8}>
-            <Card className="mt-2 mt-3">
-            <Card.Body>
-            <Card.Title>Manage your account</Card.Title>
-                <Form className="profile-form" onSubmit={handleSubmit}>
-                <Form.Group>
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                    type="text"
-                    name="username"
-                    value={Username}
-                    onChange={e => setUsername(e.target.value)}
-                    minLength="5"
-                    required
-                    placeholder="Enter a username"
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                    type="password"
-                    name="password"
-                    value={Password}
-                    onChange={e => setPassword(e.target.value)}
-                    minLength="8"
-                    required
-                    placeholder="Your password must be minimum 8 characters"
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label style={{ margin: "20px", marginTop: "10px" }}>E-mail address:</Form.Label>
-                    <Form.Control
-                    type="email"
-                    name="email"
-                    value={Email}
-                    onChange={e => setEmail(e.target.value)}
-                    required
-                    placeholder="Enter your e-mail"
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Birthday:</Form.Label>
-                    <Form.Control
-                    type="date"
-                    value={Birthday}
-                    onChange={e => setBirthday(e.target.value)}
-                    />
-                    </Form.Group>
-                <Button className="mt-3" variant="warning" type="submit" style={{ fontSize: "20px", fontWeight: "bold", width: "200px" }}>Update</Button>
-                </Form>
-                <Button
-                className="delete-account-button"
-                variant="danger"
-                onClick={() => {
-                    if (confirm("Are you sure?")) {
-                    deleteAccount();
-                    }
-                }}
-                >
-                Delete user account
-                </Button>
-            </Card.Body>
-            </Card>
-        </Col>
-        </Row>
-        <div lassName="d-flex flex-column" style={{ padding: "0 20px" }}>
-        <Card>
-            <Card.Body>
-            <Row>
-                <Col xs={12}>
-                    <h2>Favorite Movies</h2>
+        fetch(`https://movie-api-eqfh.vercel.app/users/${user.Username}`, {
+            method: "PUT",
+            body: JSON.stringify(updatedUser),
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    alert("Removing movie from favorites failed");
+                    return false;
+                }
+            })
+            .then((user) => {
+                if (user) {
+                    alert("Movie removed from favorites");
+                    setUser(updatedUser);
+                    localStorage.setItem("user", JSON.stringify(updatedUser));
+                }
+            })
+            .catch((e) => {
+                alert(e);
+            });
+    };
+
+    return (
+        <Row className="profile-view">
+            <Col md={6} className="favorite-movies-col">
+                <Card className="mt-3 mb-3 text-black favorite-movies-card">
+                    <Card.Body>
+                        <Card.Title>Your Favorite Movies</Card.Title>
+                        <Row className="favorite-movies-grid">
+                            {favoriteMoviesList.length === 0 ? (
+                                <p>No favorite movies found.</p>
+                            ) : (
+                                favoriteMoviesList.map((movie) => (
+                                    <Col key={movie._id} className="mb-4 fav-movies">
+                                        <MovieCard 
+                                            movie={movie} 
+                                            movies={movies} 
+                                            user={user} 
+                                            token={token} 
+                                            handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} 
+                                        />
+                                        <Button variant="danger" onClick={() => handleRemoveFavoriteMovie(movie)} style={{ marginLeft: "20px" }}>Remove from favorites</Button>
+                                    </Col>
+                                ))
+                            )}
+                        </Row>
+                    </Card.Body>
+                </Card>
             </Col>
-            {favoriteMoviesList.map((movie) => (
-            <Col className="mb-4" key={movie._id} x1={2} lg={3} md={4} xs={6}>
-            <MovieCard key={movie.id} movie={movie} movies={movies} user={user} token={token} handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} />
-            <Button variant="danger" onClick={() => handleRemoveFavoriteMovie(movie)}> Remove from favorites </Button>
-                    </Col>
-                    ))}
-                </Row>
-            </Card.Body>
-        </Card>
-        </div>
-        </>
+
+            <Col md={6}>
+                <Card className="mt-3 mb-3 text-black user-info-card">
+                    <Card.Body>
+                        <Card.Title>Your Info</Card.Title>
+                        <p><strong>Username:</strong> {user.Username}</p>
+                        <p><strong>Email:</strong> {user.Email}</p>
+                        <Card.Title>Manage Your Account</Card.Title>
+                        <Form className="profile-form" onSubmit={handleSubmit}>
+                            <Form.Group>
+                                <Form.Label>Username:</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="username"
+                                    value={Username}
+                                    onChange={e => setUsername(e.target.value)}
+                                    minLength="5"
+                                    required
+                                    placeholder="Enter a username"
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Password:</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    name="password"
+                                    value={Password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    minLength="8"
+                                    required
+                                    placeholder="Your password must be minimum 8 characters"
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>E-mail address:</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    name="email"
+                                    value={Email}
+                                    onChange={e => setEmail(e.target.value)}
+                                    required
+                                    placeholder="Enter your e-mail"
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Birthday:</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    value={Birthday}
+                                    onChange={e => setBirthday(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Button className="mt-3" variant="warning" type="submit">Update</Button>
+                        </Form>
+                        <Button
+                            className="delete-account-button mt-3"
+                            variant="danger"
+                            onClick={() => {
+                                if (confirm("Are you sure?")) {
+                                    deleteAccount();
+                                }
+                            }}
+                        >
+                            Delete User Account
+                        </Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row>
     );
-};
+}
