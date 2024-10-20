@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from 'react';
 import { Card, Col, Button, Row, Form } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
-import "./profile-view.scss";
 
 /**
  * Functional component representing the profile view.
@@ -15,14 +14,22 @@ import "./profile-view.scss";
 export function ProfileView({ onLoggedOut, movies, updateUser }) {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const [token, setToken] = useState(localStorage.getItem("token"));
-    const [Username, setUsername] = useState("");
+    const [Username, setUsername] = useState(user?.Username || "");
     const [Password, setPassword] = useState("");
-    const [Email, setEmail] = useState("");
-    const [Birthday, setBirthday] = useState("");
+    const [Email, setEmail] = useState(user?.Email || "");
+    const [Birthday, setBirthday] = useState(user?.Birthday || "");
 
     let favoriteMoviesList = user && user.favoriteMovies && movies 
         ? movies.filter(movie => user.favoriteMovies.includes(movie.id)) 
         : [];
+
+    useEffect(() => {
+        if (user) {
+            setUsername(user.Username);
+            setEmail(user.Email);
+            setBirthday(user.Birthday);
+        }
+    }, [user]);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -114,100 +121,98 @@ export function ProfileView({ onLoggedOut, movies, updateUser }) {
     };
 
     return (
-        <Row className="profile-view">
-            <Col md={6} className="favorite-movies-col">
-                <Card className="mt-3 mb-3 text-black favorite-movies-card">
-                    <Card.Body>
-                        <Card.Title>Your Favorite Movies</Card.Title>
-                        <Row className="favorite-movies-grid">
-                            {favoriteMoviesList.length === 0 ? (
-                                <p>No favorite movies found.</p>
-                            ) : (
-                                favoriteMoviesList.map((movie) => (
-                                    <Col key={movie._id} className="mb-4 fav-movies">
-                                        <MovieCard 
-                                            movie={movie} 
-                                            movies={movies} 
-                                            user={user} 
-                                            token={token} 
-                                            handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} 
-                                        />
-                                        <Button variant="danger" onClick={() => handleRemoveFavoriteMovie(movie)} style={{ marginLeft: "20px" }}>Remove from favorites</Button>
-                                    </Col>
-                                ))
-                            )}
-                        </Row>
-                    </Card.Body>
-                </Card>
-            </Col>
+        <div className="profile-view container mt-5">
+            <Card className="text-white bg-dark p-2">
+                <Card.Body>
+                  <Row>
+                    <Col xs={12} md={12} lg={4} className="bg-light text-dark p-2 text-center rounded h-75">
+                            <Card.Title className="m-2">Update Your Account</Card.Title>
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group controlId="formUsername">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={Username}
+                                        onChange={e => setUsername(e.target.value)}
+                                        minLength="5"
+                                        required
+                                        placeholder="Enter a username"
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        value={Password}
+                                        onChange={e => setPassword(e.target.value)}
+                                        minLength="8"
+                                        required
+                                        placeholder="Your password must be minimum 8 characters"
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formEmail">
+                                    <Form.Label>E-mail address</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        value={Email}
+                                        onChange={e => setEmail(e.target.value)}
+                                        required
+                                        placeholder="Enter your e-mail"
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="formBirthday">
+                                    <Form.Label>Birthday</Form.Label>
+                                    <Form.Control
+                                        type="date"
+                                        value={Birthday}
+                                        onChange={e => setBirthday(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Button className="mt-3 w-50" variant="primary" type="submit">Update</Button>
+                            </Form>
+                            <Button
+                                className="delete-account-button mt-3 w-50"
+                                variant="danger"
+                                onClick={() => {
+                                    if (confirm("Are you sure?")) {
+                                        deleteAccount();
+                                    }
+                                }}
+                            >
+                                Delete Account
+                            </Button>
+                        </Col>
 
-            <Col md={6}>
-                <Card className="mt-3 mb-3 text-black user-info-card">
-                    <Card.Body>
-                        <Card.Title>Your Info</Card.Title>
-                        <p><strong>Username:</strong> {user.Username}</p>
-                        <p><strong>Email:</strong> {user.Email}</p>
-                        <Card.Title>Manage Your Account</Card.Title>
-                        <Form className="profile-form" onSubmit={handleSubmit}>
-                            <Form.Group>
-                                <Form.Label>Username:</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="username"
-                                    value={Username}
-                                    onChange={e => setUsername(e.target.value)}
-                                    minLength="5"
-                                    required
-                                    placeholder="Enter a username"
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Password:</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="password"
-                                    value={Password}
-                                    onChange={e => setPassword(e.target.value)}
-                                    minLength="8"
-                                    required
-                                    placeholder="Your password must be minimum 8 characters"
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>E-mail address:</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    name="email"
-                                    value={Email}
-                                    onChange={e => setEmail(e.target.value)}
-                                    required
-                                    placeholder="Enter your e-mail"
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Birthday:</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    value={Birthday}
-                                    onChange={e => setBirthday(e.target.value)}
-                                />
-                            </Form.Group>
-                            <Button className="mt-3" variant="warning" type="submit">Update</Button>
-                        </Form>
-                        <Button
-                            className="delete-account-button mt-3"
-                            variant="danger"
-                            onClick={() => {
-                                if (confirm("Are you sure?")) {
-                                    deleteAccount();
-                                }
-                            }}
-                        >
-                            Delete User Account
-                        </Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </Row>
+                        <Col xs={12} md={12} lg={8} className="mb-4">
+                            <Card.Title className="text-center">Your Favorite Movies:</Card.Title>
+                            <Row>
+                                {favoriteMoviesList.length === 0 ? (
+                                    <p>No favorite movies found.</p>
+                                ) : (
+                                    favoriteMoviesList.map((movie) => (
+                                        <Col xs={6} sm={4} md={6} lg={4} key={movie._id} className="mb-3 w-50">
+                                            <MovieCard 
+                                                movie={movie} 
+                                                movies={movies} 
+                                                user={user} 
+                                                token={token} 
+                                                handleRemoveFavoriteMovie={handleRemoveFavoriteMovie} 
+                                            />
+                                            <Button 
+                                                variant="danger" 
+                                                onClick={() => handleRemoveFavoriteMovie(movie)} 
+                                                className="w-100"
+                                            >
+                                                Remove from favorites
+                                            </Button>
+                                        </Col>
+                                    ))
+                                )}
+                            </Row>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
+        </div>
     );
 }

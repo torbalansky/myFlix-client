@@ -5,8 +5,8 @@
 
 .login-card {
   border: none;
-  width: 400px;
   background-color: rgba(0, 0, 0, 0.253) !important;
+  width: 400px;
 
   .card-header {
     color: white;
@@ -54,19 +54,14 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 576px) {
   .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
-  .card-body {
-    padding: 25px;
-  }
-
-  button {
-    font-size: 44px;
+  .login-card {
+    width: 600px !important;
+    margin: 0 auto;
   }
 }

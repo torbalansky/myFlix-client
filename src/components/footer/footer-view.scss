@@ -1,0 +1,42 @@
+.footer {
+    position: relative;
+    bottom: 0 !important;
+    width: 100%;
+    background-color: #2222226b;
+    color: white;
+  }
+
+  
+.icon {
+    color: rgb(188, 236, 247);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 40px !important; 
+    height: 40px !important;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    
+    &.md {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    &.lg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    &:hover {
+        transform: scale(1.1);
+        color: rgb(178, 255, 178);
+    }
+}
+  
+.text-xs, a {
+    font-size: 0.75rem;
+    color: rgb(188, 236, 247) !important;
+    text-decoration: none !important;
+    font-weight: bold;
+}
+  

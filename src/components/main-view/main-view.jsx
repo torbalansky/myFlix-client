@@ -8,6 +8,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { Row, Col } from 'react-bootstrap';
 import { removeListener } from "process";
+import Footer from '../footer/Footer';
 
 /**
  * Represents the main view component.
@@ -98,7 +99,7 @@ export const MainView = () => {
               {user ? (
                 <Navigate to="/" />
               ) : (
-                  <Col md={5}>
+                  <Col md={8} lg={6} sm={10}>
                     <SignupView />
                   </Col>
               )}
@@ -112,7 +113,7 @@ export const MainView = () => {
               {user ? (
                 <Navigate to="/" />
               ) : (
-                  <Col md={5}>
+                  <Col md={6} lg={4} sm={10}>
                     <LoginView onLoggedIn={(user, token) => {
                       setUser(user)
                       setToken(token)
@@ -158,7 +159,7 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
-                  <Col md={12}>
+                  <Col md={12} lg={10} sm={12}>
                     <MovieView 
                     movie={movies} 
                     user={user} 
@@ -180,7 +181,7 @@ export const MainView = () => {
                 ) : (
                   <>
                     {viewMovies.map((movie) => (
-                      <Col xs={12} md={8} lg={3} key={movie.id}>
+                      <Col xs={8} md={6} lg={3} key={movie.id} className="text-center">
                         <MovieCard movie={movie}/>
                       </Col>
                     ))}
@@ -191,6 +192,7 @@ export const MainView = () => {
           />
         </Routes>
       </Row>
+      <Footer />
     </BrowserRouter>
   );
 };

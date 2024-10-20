@@ -5,7 +5,6 @@ import { Button, Card } from 'react-bootstrap';
 
 import "./movie-card.scss";
 
-
 /**
  * Functional component representing a movie card.
  * @param {Object} props - The component props.
@@ -23,28 +22,29 @@ export const MovieCard = ({ movie }) => {
     bottom: 0,
     left: 0,
     width: "100%",
+    height: "50%",
     background: "rgba(0, 0, 0, 0.7)", 
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     color: "white",
-    fontSize: "26px",
+    fontSize: "20px",
     fontWeight: "bold",
-    padding: "10px",
+    padding: "5px",
   };
   
     // Returns a div element that has an onClick event listener attached to it
     // The onMovieClick function is called with the `movie` object as a parameter when the div is clicked
-const cardStyle = { marginTop: "20px"};
-const descriptionWords = movie.description.split(" ").slice(0, 10).join(" ");
+  const cardStyle = { marginTop: "20px"};
+  const descriptionWords = movie.description.split(" ").slice(0, 10).join(" ");
 
     return (
-      <Card className="h-60" style={cardStyle}>
+      <Card style={cardStyle}>
         <Card.Img variant="top" src={movie.image} className="card-img-top"/>
         <div style={overlayStyle}>
         {movie.title}
-        <p style={{fontSize:"14px"}}>{descriptionWords}...</p>
+        <p style={{fontSize:"12px"}}>{descriptionWords}...</p>
         <div className="text-center mt-2">
           <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant="primary">Read more</Button>

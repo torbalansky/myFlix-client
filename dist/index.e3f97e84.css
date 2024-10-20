@@ -1,7 +1,7 @@
 @import "https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap";
 .card-img-top {
   object-fit: cover;
-  height: 400px;
+  height: 300px;
 }
 
 .card-body {
@@ -60,6 +60,52 @@
   font-size: 1.8rem;
 }
 
+@media (width <= 900px) {
+  .movie-view-container .movie-details {
+    padding: 15px;
+    font-size: 40px !important;
+  }
+
+  .movie-view-container .movie-poster {
+    max-height: 300px;
+  }
+
+  .movie-view-container .btn, .movie-view-container .btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .movie-view-container .similar-movies-heading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (width <= 576px) {
+  .movie-view-container .movie-description {
+    font-size: 2.1rem;
+    line-height: 1.6;
+  }
+
+  .movie-view-container .movie-details {
+    font-size: .8rem;
+  }
+
+  .movie-view-container .movie-poster {
+    max-height: 250px;
+  }
+
+  .movie-view-container .btn, .movie-view-container .btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .movie-view-container .movie-poster {
+    object-fit: cover;
+    border-radius: 10px;
+    max-height: 850px !important;
+  }
+}
+
 .container {
   color: #474646;
   margin-top: 50px;
@@ -116,20 +162,15 @@
   background-color: #8000ff !important;
 }
 
-@media (width <= 1000px) {
+@media (width <= 576px) {
   .container {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
-  .card-body {
-    padding: 25px;
-  }
-
-  button {
-    font-size: 44px;
+  .login-card {
+    margin: 0 auto;
+    width: 600px !important;
   }
 }
 
@@ -177,8 +218,8 @@
   color: #fff;
   border-radius: 5px;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: bold;
   transition: background-color .3s, transform .3s;
   background-color: #00f !important;
@@ -213,180 +254,87 @@
   width: 100% !important;
 }
 
-.container {
-  justify-content: center;
+.navbar-toggler-icon {
+  color: azure;
+  background-color: #0000;
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.navbar-brand {
+  color: azure;
+  background-color: #0000;
   align-items: center;
+  padding: 5px;
+  font-size: 0;
   display: flex;
+  width: 80px !important;
+  height: 80px !important;
 }
 
-.navbar-title {
-  font-weight: bold;
-  transition: transform .3s;
-  color: #fff !important;
-  font-size: 50px !important;
+.navbar-brand svg {
+  color: #fff;
+  width: 100px;
+  height: 100px;
+  transition: transform .3s, color .3s;
 }
 
-.navbar-title:hover {
+.navbar-brand svg:hover {
+  color: #cefcec;
   transform: scale(1.1);
 }
 
-@media (width <= 768px) {
-  .navbar-title {
-    font-size: 18px;
-  }
-}
-
-@media (width <= 576px) {
-  .navbar-title {
-    font-size: 14px;
-  }
-}
-
-.navbar-collapse {
-  z-index: 9999;
-}
-
-.me-auto {
-  align-items: center;
-  display: flex;
-}
-
-.me-auto .btn {
-  border-radius: 20px;
-  margin: 0 5px;
-  transition: background-color .3s, transform .3s;
-  background-color: #fff !important;
-  border: none !important;
-}
-
-.me-auto .btn:hover {
-  transform: scale(1.05);
-  background-color: #f8e6fc !important;
-}
-
-.home-link, .profile-link, .logout-link {
-  border-bottom: 2px solid #d0ff00;
-  margin-right: 15px;
-  padding: 10px 15px;
-  transition: background-color .3s;
-  color: #fff !important;
+.nav-link {
+  transition: transform .3s, color .3s;
   font-size: 20px !important;
   font-weight: bold !important;
 }
 
-.home-link:hover, .profile-link:hover, .logout-link:hover {
-  background-color: #333e01;
-}
-
-.navbar-toggler-icon {
-  background-color: #fff;
-}
-
-.nav-menu {
-  display: flex;
-  position: absolute;
-  right: 250px;
-}
-
-.d-flex {
-  width: 200px;
-  margin-top: 5px;
-}
-
-@media (width <= 896px) {
-  .home-link, .profile-link, .logout-link {
-    display: none;
-  }
-
-  .navbar {
-    padding: 0 10px;
-  }
-
-  .navbar-title {
-    font-size: 80px;
-  }
-
-  .form {
-    display: none;
-  }
-}
-
-.profile-view {
-  justify-content: space-between;
-  padding: 10px;
-  display: flex;
-}
-
-.favorite-movies-col {
-  max-height: 600px;
-  overflow-y: auto;
-}
-
-.favorite-movies-card, .user-info-card {
-  background-color: #f9f9f9;
+.nav-link:hover {
+  background-color: #05002b;
   border-radius: 10px;
-  width: 600px;
-  height: 100%;
-  padding: 20px;
-  box-shadow: 0 2px 10px #0000001a;
+  transform: scale(1.1);
 }
 
-.profile-form {
+.footer {
+  color: #fff;
+  background-color: #2222226b;
+  width: 100%;
+  position: relative;
+  bottom: 0 !important;
+}
+
+.icon {
+  color: #bcecf7;
   text-align: center;
-  color: #000;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 15px;
-}
-
-.profile-form label {
-  font-weight: bold;
-}
-
-.profile-form input {
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  box-shadow: 2px 2px 5px #0000004d;
-}
-
-.delete-account-button {
-  border-radius: 5px;
-  width: 100%;
-  margin: 10px 0;
-  font-weight: bold;
-  display: block;
-}
-
-.favorite-movies-card h2, .user-info-card h2 {
-  margin-bottom: 15px;
-  font-size: 24px;
-}
-
-.favorite-movies-grid, .favorite-movies-card {
-  flex-direction: column;
+  cursor: pointer;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  display: flex;
+  transition: all .2s ease-in-out;
+  width: 40px !important;
+  height: 40px !important;
 }
 
-.movie-card {
-  max-width: 100%;
-  height: auto;
+.icon.md {
+  width: 36px !important;
+  height: 36px !important;
 }
 
-@media (width <= 968px) {
-  .profile-view {
-    flex-direction: column !important;
-    display: flex !important;
-  }
+.icon.lg {
+  width: 24px;
+  height: 24px;
+}
 
-  .favorite-movies-card, .user-info-card {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+.icon:hover {
+  color: #b2ffb2;
+  transform: scale(1.1);
+}
+
+.text-xs, a {
+  font-size: .75rem;
+  font-weight: bold;
+  color: #bcecf7 !important;
+  text-decoration: none !important;
 }
 
 :root {
@@ -24492,6 +24440,7 @@ textarea.form-control-lg {
 body {
   color: #fff;
   background: linear-gradient(90deg, #05000fd9, #3a8cffb0);
+  margin: 0;
   font-family: Roboto, sans-serif;
 }
 

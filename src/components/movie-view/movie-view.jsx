@@ -74,11 +74,17 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
   return currentMovie ? (
     <div className="movie-view-container container-fluid p-4">
       <Row className="justify-content-center mb-4">
-        <Col md={5} className="text-center">
-          <img src={currentMovie.image} alt={currentMovie.title} className="movie-poster img-fluid rounded shadow-lg" />
+        <Col xs={4} sm={4} md={4} lg={4} className="text-center mb-4 mb-md-0">
+          <img 
+            src={currentMovie.image} 
+            alt={currentMovie.title} 
+            className="movie-poster img-fluid rounded shadow-lg" 
+            style={{ maxHeight: '500px', objectFit: 'cover' }} 
+          />
         </Col>
-        <Col md={7}>
-          <div className="movie-details p-4">
+
+        <Col xs={8} sm={8} md={8} lg={8}>
+          <div className="movie-details p-4" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", borderRadius: '10px' }}>
             <h1 className="text-light mb-3">{currentMovie.title}</h1>
             <p className="text-muted">Directed by <span className="fw-bold">{currentMovie.director}</span></p>
             <p className="text-muted">Genre: <span className="fw-bold">{currentMovie.genre}</span></p>
@@ -103,8 +109,8 @@ export const MovieView = ({ movie, updateUser, favoriteMovies }) => {
       </Row>
       <Row className="mt-5">
         <Col>
-          <h2 className="text-light text-center">Similar Movies</h2>
-          <Row className="g-4">
+          <h2 className="text-light text-left p-4">Similar Movies</h2>
+          <Row className="p-1">
             {similarMovies.length > 0 ? (
               similarMovies.map((movie) => (
                 <Col xs={12} sm={6} md={4} lg={3} key={movie.id}>
